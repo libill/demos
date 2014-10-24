@@ -1,1 +1,16 @@
-touch .gitignore  #创建gitignore隐藏文件
+
+
+git 使用
+ssh -T git@github.com                               #登录github
+cd <fileName>                                       #进去该文件夹
+cd ..                                               #返回到上一层文件夹
+touch .gitignore                                    #创建gitignore隐藏文件
+git branch                                          #查看本地分支
+git branch -a                                       #查看远程分支
+git branch <branchName>                             #添加本地分支
+git branch -d <branchName>                          #删除本地分支
+git push origin <branchName>                        #把本地分支推送到远程服务器，等于在服务器创建了一条分支
+git checkout <branchName>                           #切换分支
+git push origin --delete <branchName>               #删除远程分支
+git push origin --delete tag <tagname>              #删除远程tag
+git pull                                            #把远程的更改全部拉到本地
