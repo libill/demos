@@ -4,6 +4,11 @@ mkdir key_backup                                    #创建密钥备份文件夹
 cp id_rsa* key_backup                               #复制密钥到备份文件夹
 rm id_rsa*                                          #删掉原来的密钥
 ssh-keygen -t rsa -C "770737185@qq.com"             #填写email地址，生成新密钥
+vim id_rsa.pub                                      #查看id_rsa.pub文件的密钥，添加到github（add ssh），这里产生token
+git config --global user.name "libill"              #给自己起个用户名
+git config --global user.email "770737185@qq.com"   #填写自己的邮箱
+git config --global github.user libill              #github上的用户名
+git config --global github.token yourtoken          #token为添加SSH key成功后可以看到，复制过来
 
 git 使用
 ssh -T git@github.com                               #登录github
