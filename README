@@ -1,4 +1,9 @@
-
+git 安装
+~/.ssh                                              #检查计算机ssh密钥
+mkdir key_backup                                    #创建密钥备份文件夹
+cp id_rsa* key_backup                               #复制密钥到备份文件夹
+rm id_rsa*                                          #删掉原来的密钥
+ssh-keygen -t rsa -C "770737185@qq.com"             #填写email地址，生成新密钥
 
 git 使用
 ssh -T git@github.com                               #登录github
