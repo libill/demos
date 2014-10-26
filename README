@@ -14,7 +14,7 @@ git 使用
 ssh -T git@github.com                               #登录github
 cd <fileName>                                       #进去该文件夹
 cd ..                                               #返回到上一层文件夹
-touch .gitignore                                    #创建gitignore隐藏文件
+touch .gitignore                                    #创建gitignore隐藏文件,把服务器上的文件夹或文件删掉才起作用，why
 git branch                                          #查看本地分支
 git branch -a                                       #查看远程分支
 git branch <branchName>                             #添加本地分支
