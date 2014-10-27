@@ -32,6 +32,8 @@
         <activity android:name=".activity.SimpleCursorAdapterActivity" />
         <activity android:name=".activity.BaseAdapterActivity" />
         
+        <activity android:name=".activity.LifecycleActivity"/>
+        
         
     </application>
 
