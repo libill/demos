@@ -47,6 +47,13 @@ public class MainActivity extends ListActivity {
 		map.put("title", "BaseAdapterActivity");
 		list.add(map);
 		
+		map = new HashMap<String, String>();
+		map.put("title", "KeyWatchActivity");
+		list.add(map);
+		
+		map = new HashMap<String, String>();
+		map.put("title", "ServiceActivity");
+		list.add(map);
 		
 		MainBaseAdapter adapter = new MainBaseAdapter(this, list);
 		this.setListAdapter(adapter);
@@ -73,7 +80,12 @@ public class MainActivity extends ListActivity {
 		case 5:
 			startActivityNow(BaseAdapterActivity.class);
 			break;	
-			
+		case 6:
+			startActivityNow(KeyWatchActivity.class);
+			break;		
+		case 7:
+			startActivityNow(ServiceActivity.class);
+			break;		
 		default:
 			break;
 		}
