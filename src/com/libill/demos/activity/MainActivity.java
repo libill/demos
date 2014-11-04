@@ -55,6 +55,10 @@ public class MainActivity extends ListActivity {
 		map.put("title", "ServiceActivity");
 		list.add(map);
 		
+		map = new HashMap<String, String>();
+		map.put("title", "PhoneInfomationActivity");
+		list.add(map);
+		
 		MainBaseAdapter adapter = new MainBaseAdapter(this, list);
 		this.setListAdapter(adapter);
 	}
@@ -86,6 +90,10 @@ public class MainActivity extends ListActivity {
 		case 7:
 			startActivityNow(ServiceActivity.class);
 			break;		
+		case 8:
+			startActivityNow(PhoneInfomationActivity.class);
+			break;			
+			
 		default:
 			break;
 		}

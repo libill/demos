@@ -126,7 +126,7 @@ public class ServiceActivity extends Activity implements OnClickListener {
             stopService(stopRIntent);  
             break;  
         case R.id.bind_remote_service:  
-            Intent bindRIntent = new Intent("com.libill.demos.service.RemoteAIDLService");  
+            Intent bindRIntent = new Intent("com.libill.demos.service.RemoteAIDLService");
             bindService(bindRIntent, remoteConnection, BIND_AUTO_CREATE);  
             break;  
         case R.id.unbind_remote_service:  
