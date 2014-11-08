@@ -7,8 +7,13 @@
     <uses-sdk
         android:minSdkVersion="8"
         android:targetSdkVersion="10" />
-    
+
     <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <!-- Home监听需要的权限 -->
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
 
     <application
         android:allowBackup="true"
@@ -24,17 +29,37 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        
         <activity android:name=".activity.ArrayAdapterListActivity" />
         <activity android:name=".activity.ArrayAdapterActivity" />
         <activity android:name=".activity.SimpleAdapterActivity" />
         <activity android:name=".activity.SimpleAdapterListActivity" />
         <activity android:name=".activity.SimpleCursorAdapterActivity" />
         <activity android:name=".activity.BaseAdapterActivity" />
+        <activity android:name=".activity.KeyWatchActivity" />
+        <activity android:name=".activity.ServiceActivity" />
+        <activity android:name=".activity.PhoneInfomationActivity" />
         
         <activity android:name=".activity.LifecycleActivity"/>
         
-        
+        <service
+            android:name=".service.HomeKeyWatchService"
+            android:enabled="true"
+            android:exported="false" >
+        </service>
+        <service
+            android:name=".service.ScreenLockWatchService"
+            android:enabled="true"
+            android:exported="false" >
+        </service>
+        <service android:name=".service.MyService" >
+        </service>
+        <service
+            android:name=".service.RemoteService"
+            android:process=":remote" >
+            <intent-filter>
+                <action android:name="com.libill.demos.service.RemoteAIDLService" />
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>
