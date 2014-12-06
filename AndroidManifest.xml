@@ -40,6 +40,8 @@
         <activity android:name=".activity.PhoneInfomationActivity" />
         
         <activity android:name=".activity.LifecycleActivity"/>
+        <activity android:name=".activity.SharePreferencesActivity"/>
+        
         
         <service
             android:name=".service.HomeKeyWatchService"

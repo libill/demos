@@ -63,6 +63,10 @@ public class MainActivity extends ListActivity {
 		map.put("title", "LifecycleActivity");
 		list.add(map);
 		
+		map = new HashMap<String, String>();
+		map.put("title", "SharePreferencesActivity");
+		list.add(map);
+		
 		MainBaseAdapter adapter = new MainBaseAdapter(this, list);
 		this.setListAdapter(adapter);
 	}
@@ -100,6 +104,10 @@ public class MainActivity extends ListActivity {
 		case 9:
 			startActivityNow(LifecycleActivity.class);
 			break;
+		case 10:
+			startActivityNow(SharePreferencesActivity.class);
+			break;
+			
 			
 		default:
 			break;
