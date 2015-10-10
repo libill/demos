@@ -67,6 +67,18 @@ public class MainActivity extends ListActivity {
 		map.put("title", "SharePreferencesActivity");
 		list.add(map);
 		
+		map = new HashMap<String, String>();
+		map.put("title", "ArrayAdapterActivity2");
+		list.add(map);
+		
+		map = new HashMap<String, String>();
+		map.put("title", "UDPActivity");
+		list.add(map);
+		
+		map = new HashMap<String, String>();
+		map.put("title", "UDPServerActivity");
+		list.add(map);
+		
 		MainBaseAdapter adapter = new MainBaseAdapter(this, list);
 		this.setListAdapter(adapter);
 	}
@@ -107,7 +119,15 @@ public class MainActivity extends ListActivity {
 		case 10:
 			startActivityNow(SharePreferencesActivity.class);
 			break;
-			
+		case 11:
+			startActivityNow(ArrayAdapterActivity2.class);
+			break;	
+		case 12:
+			startActivityNow(UDPActivity.class);
+			break;	
+		case 13:
+			startActivityNow(UDPServerActivity.class);
+			break;	
 			
 		default:
 			break;

@@ -11,15 +11,18 @@
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <!-- Home监听需要的权限 -->
     <uses-permission android:name="android.permission.GET_TASKS" />
-    
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+	<uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
+ 	<uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+ 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+ 	<uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+ 	<uses-permission android:name="android.permission.INTERNET"/>
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppStartTheme" >
         <activity
             android:name="com.libill.demos.activity.MainActivity"
             android:label="@string/app_name" >
@@ -31,6 +34,7 @@
         </activity>
         <activity android:name=".activity.ArrayAdapterListActivity" />
         <activity android:name=".activity.ArrayAdapterActivity" />
+        <activity android:name=".activity.ArrayAdapterActivity2" />
         <activity android:name=".activity.SimpleAdapterActivity" />
         <activity android:name=".activity.SimpleAdapterListActivity" />
         <activity android:name=".activity.SimpleCursorAdapterActivity" />
@@ -38,9 +42,11 @@
         <activity android:name=".activity.KeyWatchActivity" />
         <activity android:name=".activity.ServiceActivity" />
         <activity android:name=".activity.PhoneInfomationActivity" />
+        <activity android:name=".activity.LifecycleActivity" />
+        <activity android:name=".activity.SharePreferencesActivity" />
+        <activity android:name=".activity.UDPActivity" />
+        <activity android:name=".activity.UDPServerActivity" />
         
-        <activity android:name=".activity.LifecycleActivity"/>
-        <activity android:name=".activity.SharePreferencesActivity"/>
         
         
         <service
