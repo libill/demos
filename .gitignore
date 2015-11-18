@@ -1,3 +1,47 @@
-#touch .gitignore  #创建gitignore隐藏文件
-bin
+*.py[cod]
+
+# C extensions
+*.so
+
+# Packages
+*.egg
+*.egg-info
+dist
+build
+eggs
+parts
 gen
+bin
+var
+sdist
+develop-eggs
+.installed.cfg
+lib
+lib64
+
+# Installer logs
+pip-log.txt
+
+# Unit test / coverage reports
+.coverage
+.tox
+nosetests.xml
+
+# Translations
+*.mo
+
+# Mr Developer
+.mr.developer.cfg
+.project
+.pydevproject
+
+.gradle
+.idea
+.classpath
+*.iml
+gradle
+.classpath
+*.classpath
+.settings/org.eclipse.core.resources.prefs
+cstudents.iml
+local.properties
