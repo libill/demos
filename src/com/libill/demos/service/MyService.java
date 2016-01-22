@@ -55,6 +55,16 @@ public class MyService extends Service {
 		return mBinder;
 	}
 
+	@Override
+	public boolean onUnbind(Intent intent) {
+		return super.onUnbind(intent);
+	}
+
+	@Override
+	public void onRebind(Intent intent) {
+		super.onRebind(intent);
+	}
+
 	public class MyBinder extends Binder {
 
 		public void startDownload() {

@@ -8,6 +8,8 @@ import android.content.Context;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.HandlerThread;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
@@ -23,6 +25,42 @@ public class UDPServerActivity extends Activity {
     private TextView tv_ip;
     private TextView tv_receive_msg;
     private Button bt_start;
+    private Handler mHandler ;
+   // private Thread mThread;
+   DatagramSocket socket = null;
+
+    boolean isRunning = true;
+
+    private Runnable mRunnable = new Runnable() {
+        @Override
+        public void run() {
+
+            try {
+                socket = new DatagramSocket(8888);
+
+                while (isRunning) {
+                    byte data[] = new byte[1024];
+                    DatagramPacket packet = new DatagramPacket(data, data.length);
+                    socket.receive(packet);
+                    final String result = new String(packet.getData(), packet.getOffset(), packet.getLength());
+                    Log.i("get result:", result);
+
+                    runOnUiThread(new Runnable() {
+
+                        @Override
+                        public void run() {
+                            Toast.makeText(UDPServerActivity.this, result + "", Toast.LENGTH_SHORT).show();
+                            tv_receive_msg.setText(tv_receive_msg.getText().toString() + "\n" + result);
+                        }
+                    });
+
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    };
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -36,51 +74,53 @@ public class UDPServerActivity extends Activity {
         tv_receive_msg.setMovementMethod(ScrollingMovementMethod.getInstance());
 
         getCurrentIP();
-
+        initUDPServerThread();
+        HandlerThread thread = new HandlerThread("MyHandlerThread");
+        thread.start();
+        mHandler = new Handler(thread.getLooper());
         bt_start.setOnClickListener(new OnClickListener() {
 
             @Override
             public void onClick(View arg0) {
                 bt_start.setText("已开启");
-
-                runUDPServer();
+                mHandler.post(mRunnable);
             }
 
         });
     }
 
-    private void runUDPServer(){
-        new Thread(new Runnable() {
-
-            @Override
-            public void run() {
-                DatagramSocket socket = null;
-                try {
-                    socket = new DatagramSocket(8888);
-
-                    while (true) {
-                        byte data[] = new byte[1024];
-                        DatagramPacket packet = new DatagramPacket(data, data.length);
-                        socket.receive(packet);
-                        final String result = new String(packet.getData(), packet.getOffset(), packet.getLength());
-                        Log.i("get result:", result);
-
-                        runOnUiThread(new Runnable() {
-
-                            @Override
-                            public void run() {
-                                Toast.makeText(UDPServerActivity.this, result + "", Toast.LENGTH_SHORT).show();
-                                tv_receive_msg.setText(tv_receive_msg.getText().toString() + "\n" + result);
-                            }
-                        });
-
-                    }
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }).start();
+    private void initUDPServerThread(){
+//        mThread = new Thread(new Runnable() {
+//
+//            @Override
+//            public void run() {
+//                DatagramSocket socket = null;
+//                try {
+//                    socket = new DatagramSocket(8888);
+//
+//                    while (true) {
+//                        byte data[] = new byte[1024];
+//                        DatagramPacket packet = new DatagramPacket(data, data.length);
+//                        socket.receive(packet);
+//                        final String result = new String(packet.getData(), packet.getOffset(), packet.getLength());
+//                        Log.i("get result:", result);
+//
+//                        runOnUiThread(new Runnable() {
+//
+//                            @Override
+//                            public void run() {
+//                                Toast.makeText(UDPServerActivity.this, result + "", Toast.LENGTH_SHORT).show();
+//                                tv_receive_msg.setText(tv_receive_msg.getText().toString() + "\n" + result);
+//                            }
+//                        });
+//
+//                    }
+//
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        });
     }
 
     private void getCurrentIP() {
@@ -103,5 +143,16 @@ public class UDPServerActivity extends Activity {
                 (i >> 24 & 0xFF);
     }
 
+    @Override
+    protected void onDestroy() {
+        isRunning = false;
+        if(socket!=null && socket.isConnected()) {
+            socket.disconnect();
+            socket.close();
+            socket = null;
+        }
 
+        mHandler.removeCallbacks(mRunnable);
+        super.onDestroy();
+    }
 }

@@ -130,8 +130,8 @@ public class ServiceActivity extends Activity implements OnClickListener {
             bindService(bindRIntent, remoteConnection, BIND_AUTO_CREATE);  
             break;  
         case R.id.unbind_remote_service:  
-            Log.d("RemoteService", "click Unbind Service button");  
-            unbindService(remoteConnection);  
+            Log.d("RemoteService", "click Unbind Service button");
+            unbindService(remoteConnection);
             break;  
         default:  
             break;  
