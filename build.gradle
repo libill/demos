@@ -60,6 +60,26 @@ android {
 task printVersion << {
     print "compileSdkVersion is ${android.compileSdkVersion};  "
     println "buildToolsVersion is ${android.buildToolsVersion}  "
+
+    //当前日期时间
+    String nowDate = new Date().format('yyyyMMddHHmmss')
+    String fileName = "assets/package/README_${nowDate}"
+
+    //先删掉该文件夹的文件
+    fileTree('assets/package').forEach({ file ->
+        file.delete();
+    })
+
+    //拷贝文件过来
+    copy {
+        from 'README'
+        into 'assets/package'
+    }
+
+    //重命名文件
+    File file = new File("assets/package/README");
+    file.renameTo(fileName)
+
 }
 
 // 再执行preBuild之前插入执行task, 处理或输出一些信息
