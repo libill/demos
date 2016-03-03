@@ -22,7 +22,8 @@ public class SharePreferencesActivity extends Activity {
 		setContentView(R.layout.activity_sharepreferences);
 		final Button button = (Button) findViewById(R.id.bt_save_share);
 		button.setText("点击一下屏幕哦，就可以设置SharedPreferences并获取值显示在屏幕上");
-		final Animation alphaAnimation = AnimationUtils.loadAnimation(this, R.anim.show_anim);
+		final Animation alphaAnimation = AnimationUtils.loadAnimation(this, R.anim.my_anim_window_close_in);
+		// R.anim.show_anim
 		button.postDelayed(new Runnable() {
 			@Override
 			public void run() {

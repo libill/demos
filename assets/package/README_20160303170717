@@ -1,0 +1,28 @@
+git 安装
+~/.ssh                                              #检查计算机ssh密钥
+mkdir key_backup                                    #创建密钥备份文件夹
+cp id_rsa* key_backup                               #复制密钥到备份文件夹
+rm id_rsa*                                          #删掉原来的密钥
+ssh-keygen -t rsa -C "770737185@qq.com"             #填写email地址，生成新密钥
+vim id_rsa.pub                                      #查看id_rsa.pub文件的密钥，添加到github（add ssh），这里产生token
+git config --global user.name "libill"              #给自己起个用户名
+git config --global user.email "770737185@qq.com"   #填写自己的邮箱
+git config --global github.user libill              #github上的用户名
+git config --global github.token yourtoken          #token为添加SSH key成功后可以看到，复制过来
+
+git 使用
+ssh -T git@github.com                               #登录github
+cd <fileName>                                       #进去该文件夹
+cd ..                                               #返回到上一层文件夹
+touch .gitignore                                    #创建gitignore隐藏文件,把服务器上的文件夹或文件删掉才起作用，why
+git branch                                          #查看本地分支
+git branch -a                                       #查看远程分支
+git branch <branchName>                             #添加本地分支
+git branch -d <branchName>                          #删除本地分支
+git push origin <branchName>                        #把本地分支推送到远程服务器，等于在服务器创建了一条分支
+git push origin tag <branchName>                    #把本地tag推送到远程服务器，等于在服务器创建了一条tag
+git checkout <branchName>                           #切换分支
+git push origin --delete <branchName>               #删除远程分支
+git push origin --delete tag <tagname>              #删除远程tag
+git pull                                            #把远程的更改全部拉到本地
+git checkout -- + 需要恢复的文件名                  #把某个文件恢复到最后一次提交的改动

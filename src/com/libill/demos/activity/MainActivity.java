@@ -103,16 +103,16 @@ public class MainActivity extends ListActivity {
 			break;
 		case 5:
 			startActivityNow(BaseAdapterActivity.class);
-			break;	
+			break;
 		case 6:
 			startActivityNow(KeyWatchActivity.class);
-			break;		
+			break;
 		case 7:
 			startActivityNow(ServiceActivity.class);
-			break;		
+			break;
 		case 8:
 			startActivityNow(PhoneInfomationActivity.class);
-			break;			
+			break;
 		case 9:
 			startActivityNow(LifecycleActivity.class);
 			break;
@@ -121,14 +121,14 @@ public class MainActivity extends ListActivity {
 			break;
 		case 11:
 			startActivityNow(ArrayAdapterActivity2.class);
-			break;	
+			break;
 		case 12:
 			startActivityNow(UDPActivity.class);
-			break;	
+			break;
 		case 13:
 			startActivityNow(UDPServerActivity.class);
-			break;	
-			
+			break;
+
 		default:
 			break;
 		}
@@ -136,6 +136,8 @@ public class MainActivity extends ListActivity {
 	
 	public void startActivityNow(Class aClass){
 		Intent intent = new Intent(MainActivity.this, aClass);
+		intent.putExtra("aTestContent","This is a test content.");
+		startActivity(intent);
 		startActivity(intent);
 	}
 }
