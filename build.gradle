@@ -66,7 +66,7 @@ android {
 
 
 // 自定义一个task
-task printVersion << {
+task downloadPackageTask << {
     print "compileSdkVersion is ${android.compileSdkVersion};  "
     println "buildToolsVersion is ${android.buildToolsVersion}  "
 
@@ -138,4 +138,4 @@ def redirectFollowingDownload( String url, String filename, String targetPath ) 
 
 // 再执行preBuild之前插入执行task, 处理或输出一些信息
 // @see: http://www.blogjava.net/wldandan/archive/2012/07/05/382246.html
-preBuild.dependsOn printVersion
+preBuild.dependsOn downloadPackageTask
