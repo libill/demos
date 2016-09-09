@@ -26,3 +26,7 @@ git push origin --delete <branchName>               #删除远程分支
 git push origin --delete tag <tagname>              #删除远程tag
 git pull                                            #把远程的更改全部拉到本地
 git checkout -- + 需要恢复的文件名                  #把某个文件恢复到最后一次提交的改动
+
+无法添加某个文件夹时
+git rm --cached directory
+git add directory
