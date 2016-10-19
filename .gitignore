@@ -44,4 +44,3 @@ gradle
 *.classpath
 .settings/org.eclipse.core.resources.prefs
 cstudents.iml
-local.properties
