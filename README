@@ -9,6 +9,7 @@ git config --global user.name "libill"              #给自己起个用户名
 git config --global user.email "770737185@qq.com"   #填写自己的邮箱
 git config --global github.user libill              #github上的用户名
 git config --global github.token yourtoken          #token为添加SSH key成功后可以看到，复制过来
+git config --global credential.helper store         #git避免每次提交获取最新代码时，都需要输入账号密码
 
 git 使用
 ssh -T git@github.com                               #登录github
