@@ -1,7 +1,6 @@
 apply plugin: 'com.lv.weblogic'
 // 声明构建的项目类型
 apply plugin: 'com.android.application'
-apply plugin: 'eclipse'
 
 buildscript {
 
@@ -10,15 +9,12 @@ buildscript {
         google()
         jcenter()
         mavenLocal()
-        //阿里仓库
         maven { url 'http://maven.aliyun.com/nexus/content/repositories/releases/' }
         maven { url "http://central.maven.org/maven2/" }
         maven { url "http://dl.bintray.com/laobie/maven" }
         maven { url "https://maven.google.com" }
         maven { url 'https://jitpack.io' }
-        maven {
-            url "https://plugins.gradle.org/m2/"
-        }
+        maven { url "https://plugins.gradle.org/m2/" }
     }
 
     dependencies {
@@ -34,7 +30,6 @@ allprojects {
         google()
         jcenter()
         mavenLocal()
-        //阿里仓库
         maven { url 'http://maven.aliyun.com/nexus/content/repositories/releases/' }
         maven { url "http://central.maven.org/maven2/" }
         maven { url "http://dl.bintray.com/laobie/maven" }
@@ -69,24 +64,20 @@ android {
 
     sourceSets {
         main {
-            manifest.srcFile 'AndroidManifest.xml'
-            java.srcDirs = ['src']
-            resources.srcDirs = ['src']
-            aidl.srcDirs = ['src']
-            renderscript.srcDirs = ['src']
-            res.srcDirs = ['res']
-            assets.srcDirs = ['assets']
-            jniLibs.srcDirs = ['libs']
+            aidl.srcDirs = ['src/main/java']
         }
+    }
 
-        // Move the build types to build-types/<type>
-        // For instance, build-types/debug/java, build-types/debug/AndroidManifest.xml, ...
-        // This moves them out of them default location under src/<type>/... which would
-        // conflict with src/ being used by the main source set.
-        // Adding new build types or product flavors should be accompanied
-        // by a similar customization.
-        debug.setRoot('build-types/debug')
-        release.setRoot('build-types/release')
+    buildTypes {
+        release {
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
     }
 }
 
@@ -97,9 +88,9 @@ task downloadPackageTask << {
 
     //当前日期时间
     String nowDate = new Date().format('yyyyMMddHHmmss')
-    String fileName = "assets/package/README_${nowDate}"
+    String fileName = "src/main/assets/package/README_${nowDate}"
 
-    String targetPath = getBuildDir().parent + "\\assets\\package\\"
+    String targetPath = getBuildDir().parent + "\\src\\main\\assets\\package\\"
 
     //先删掉该文件夹的文件
     fileTree(targetPath).forEach({ file ->
@@ -113,7 +104,7 @@ task downloadPackageTask << {
     }
 
     //重命名文件
-    File file = new File("assets/package/README")
+    File file = new File("src/main/assets/package/README")
     file.renameTo(fileName)
 //    String remoteFilePath = "http://files.cnblogs.com/liqw/"
 //    String zipName = "Bezier.zip"
