@@ -111,7 +111,7 @@ public class MainActivity extends ListActivity {
 			startActivityNow(ServiceActivity.class);
 			break;
 		case 8:
-			startActivityNow(PhoneInfomationActivity.class);
+			startActivityNow(PhoneInformationActivity.class);
 			break;
 		case 9:
 			startActivityNow(LifecycleActivity.class);

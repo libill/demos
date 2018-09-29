@@ -44,6 +44,12 @@ dependencies {
     implementation fileTree(dir: 'libs', include: '*.jar')
 
     api "com.android.support:support-v4:${androidSupportVersion}"
+
+    api ("com.github.hotchemi:permissionsdispatcher:3.3.1" , {
+        exclude group: 'com.android.support', module: 'support-v13'
+    })
+
+    annotationProcessor "com.github.hotchemi:permissionsdispatcher-processor:3.3.1"
 }
 
 // 设置编译android项目的参数，构建android项目的所有配置在这里完成

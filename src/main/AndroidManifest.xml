@@ -40,7 +40,7 @@
         <activity android:name=".activity.BaseAdapterActivity" />
         <activity android:name=".activity.KeyWatchActivity" />
         <activity android:name=".activity.ServiceActivity" />
-        <activity android:name=".activity.PhoneInfomationActivity" />
+        <activity android:name=".activity.PhoneInformationActivity" />
         <activity
             android:name=".activity.LifecycleActivity"
             android:launchMode="singleTop" />
