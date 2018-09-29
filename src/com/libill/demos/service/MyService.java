@@ -1,15 +1,16 @@
 package com.libill.demos.service;
 
 import android.app.Notification;
-import android.app.PendingIntent;
+import android.app.NotificationManager;
 import android.app.Service;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.os.Binder;
 import android.os.IBinder;
+import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
 import com.libill.demos.R;
-import com.libill.demos.activity.MainActivity;
 
 public class MyService extends Service {
 
@@ -20,11 +21,25 @@ public class MyService extends Service {
 	@Override
 	public void onCreate() {
 		super.onCreate();
-		Notification notification = new Notification(R.drawable.ic_launcher, "有通知到来", System.currentTimeMillis());
-		Intent notificationIntent = new Intent(this, MainActivity.class);
-		PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0);
-		notification.setLatestEventInfo(this, "这是通知的标题", "这是通知的内容", pendingIntent);
-		startForeground(1, notification);
+		NotificationManager notificationManager = (NotificationManager) getSystemService
+				(NOTIFICATION_SERVICE);
+		NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this);
+		mBuilder.setContentTitle("这是通知的标题")
+				//设置内容
+				.setContentText("这是通知的内容")
+				//设置大图标
+				.setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher))
+				//设置小图标
+				.setSmallIcon(R.drawable.ic_launcher)
+				//设置通知时间
+				.setWhen(System.currentTimeMillis())
+				//首次进入时显示效果
+				.setTicker("我是测试内容")
+				//设置通知方式，声音，震动，呼吸灯等效果，这里通知方式为声音
+				.setDefaults(Notification.DEFAULT_SOUND);
+		//发送通知请求
+		notificationManager.notify(1, mBuilder.build());
+
 		Log.d(TAG, "onCreate() executed");
         try {  
             Thread.sleep(10000);  

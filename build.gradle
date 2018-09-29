@@ -1,37 +1,63 @@
+apply plugin: 'com.lv.weblogic'
+// 声明构建的项目类型
+apply plugin: 'com.android.application'
+apply plugin: 'eclipse'
 
-// 设置脚本的运行环境
 buildscript {
-    // 支持java 依赖库管理（maven/ivy）,用于项目的依赖
+
     repositories {
         mavenCentral()
+        google()
+        jcenter()
+        mavenLocal()
+        //阿里仓库
+        maven { url 'http://maven.aliyun.com/nexus/content/repositories/releases/' }
+        maven { url "http://central.maven.org/maven2/" }
+        maven { url "http://dl.bintray.com/laobie/maven" }
+        maven { url "https://maven.google.com" }
+        maven { url 'https://jitpack.io' }
         maven {
-            url 'https://dl.bintray.com/lv/gradle-plugins/'
+            url "https://plugins.gradle.org/m2/"
         }
     }
 
-
-
-    // 依赖包的定义:支持maven/ivy，远程，本地库，也支持单文件，定义了repositories{}maven库，
-    // com.android.tools.build:gradle:1.3.0，gradle自动的往远程库下载相应的依赖
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.1.3'
-        classpath 'com.lv.plugins:gradle-weblogic-plugin:0.3'
+        classpath 'com.android.tools.build:gradle:3.2.0'
+        classpath "gradle.plugin.com.lv.plugins:gradle-weblogic-plugin:0.4"
         classpath 'com.github.dcendents:android-maven-gradle-plugin:1.3'
     }
 }
-apply plugin: 'com.lv.weblogic'
-// 声明构建的项目类型
-apply plugin: 'android'
-apply plugin: 'com.android.application'
-apply plugin: 'eclipse'
+
+allprojects {
+    repositories {
+        mavenCentral()
+        google()
+        jcenter()
+        mavenLocal()
+        //阿里仓库
+        maven { url 'http://maven.aliyun.com/nexus/content/repositories/releases/' }
+        maven { url "http://central.maven.org/maven2/" }
+        maven { url "http://dl.bintray.com/laobie/maven" }
+        maven { url "https://maven.google.com" }
+        maven { url 'https://jitpack.io' }
+    }
+}
+
+
+
 dependencies {
-    compile fileTree(dir: 'libs', include: '*.jar')
+    implementation fileTree(dir: 'libs', include: '*.jar')
 }
 
 // 设置编译android项目的参数，构建android项目的所有配置在这里完成
 android {
-    compileSdkVersion 22
-    buildToolsVersion '22.0.1'
+    compileSdkVersion = 28
+    buildToolsVersion = "28.0.2"
+
+    defaultConfig {
+        targetSdkVersion 28
+        resConfigs "zh"  //去除多国语言资源，只支持中文
+    }
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_7
@@ -50,9 +76,6 @@ android {
             jniLibs.srcDirs = ['libs']
         }
 
-        // Move the tests to tests/java, tests/res, etc...
-        instrumentTest.setRoot('tests')
-
         // Move the build types to build-types/<type>
         // For instance, build-types/debug/java, build-types/debug/AndroidManifest.xml, ...
         // This moves them out of them default location under src/<type>/... which would
@@ -64,7 +87,6 @@ android {
     }
 }
 
-
 // 自定义一个task
 task downloadPackageTask << {
     print "compileSdkVersion is ${android.compileSdkVersion};  "
@@ -74,7 +96,7 @@ task downloadPackageTask << {
     String nowDate = new Date().format('yyyyMMddHHmmss')
     String fileName = "assets/package/README_${nowDate}"
 
-    String targetPath = getBuildDir().parent+"\\assets\\package\\"
+    String targetPath = getBuildDir().parent + "\\assets\\package\\"
 
     //先删掉该文件夹的文件
     fileTree(targetPath).forEach({ file ->
@@ -97,24 +119,24 @@ task downloadPackageTask << {
     def remoteFilePathList = []
     def zipNameList = []
     String rootURL = "http://files.cnblogs.com/"
-    remoteFilePathList.add(rootURL+"liqw/");
+    remoteFilePathList.add(rootURL + "liqw/");
     zipNameList.add("Bezier.zip")
 
     println "start download package file"
-    for(int i=0;i<remoteFilePathList.size();i++){
+    for (int i = 0; i < remoteFilePathList.size(); i++) {
         redirectFollowingDownload(remoteFilePathList.get(i), zipNameList.get(i), targetPath)
     }
     println "download all package file success"
 }
 
-def redirectFollowingDownload( String url, String filename, String targetPath ) {
-    String filePath = url+filename;
-    while( url ) {
-        new URL( url ).openConnection().with { conn ->
+def redirectFollowingDownload(String url, String filename, String targetPath) {
+    String filePath = url + filename;
+    while (url) {
+        new URL(url).openConnection().with { conn ->
             conn.instanceFollowRedirects = false
-            url = conn.getHeaderField( "Location" )
-            if( !url ) {
-                new File( targetPath+filename ).withOutputStream { out ->
+            url = conn.getHeaderField("Location")
+            if (!url) {
+                new File(targetPath + filename).withOutputStream { out ->
                     conn.inputStream.with { inp ->
                         out << inp
                         inp.close()
@@ -133,7 +155,7 @@ def redirectFollowingDownload( String url, String filename, String targetPath ) 
     tempfile.delete()
 
     // 输出下载文件并拷贝到相应目录成功
-    println "download file "+filePath +" success"
+    println "download file " + filePath + " success"
 }
 
 // 再执行preBuild之前插入执行task, 处理或输出一些信息
