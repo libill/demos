@@ -47,6 +47,8 @@ allprojects {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: '*.jar')
+
+    api "com.android.support:support-v4:${androidSupportVersion}"
 }
 
 // 设置编译android项目的参数，构建android项目的所有配置在这里完成
@@ -55,6 +57,7 @@ android {
     buildToolsVersion = "28.0.2"
 
     defaultConfig {
+        minSdkVersion 16
         targetSdkVersion 28
         resConfigs "zh"  //去除多国语言资源，只支持中文
     }
@@ -100,7 +103,7 @@ task downloadPackageTask << {
 
     //先删掉该文件夹的文件
     fileTree(targetPath).forEach({ file ->
-        file.delete();
+        file.delete()
     })
 
     //拷贝文件过来
@@ -110,7 +113,7 @@ task downloadPackageTask << {
     }
 
     //重命名文件
-    File file = new File("assets/package/README");
+    File file = new File("assets/package/README")
     file.renameTo(fileName)
 //    String remoteFilePath = "http://files.cnblogs.com/liqw/"
 //    String zipName = "Bezier.zip"
@@ -119,7 +122,7 @@ task downloadPackageTask << {
     def remoteFilePathList = []
     def zipNameList = []
     String rootURL = "http://files.cnblogs.com/"
-    remoteFilePathList.add(rootURL + "liqw/");
+    remoteFilePathList.add(rootURL + "liqw/")
     zipNameList.add("Bezier.zip")
 
     println "start download package file"
@@ -151,8 +154,13 @@ def redirectFollowingDownload(String url, String filename, String targetPath) {
         into targetPath
     }
     //删掉备份文件
-    File tempfile = new File(filename);
+    File tempfile = new File(filename)
     tempfile.delete()
+    println "delete file " + filename
+
+    if(new File(targetPath + filename).exists()){
+        println targetPath + filename + " exists"
+    }
 
     // 输出下载文件并拷贝到相应目录成功
     println "download file " + filePath + " success"
