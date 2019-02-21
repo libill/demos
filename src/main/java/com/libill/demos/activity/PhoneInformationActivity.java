@@ -3,7 +3,7 @@ package com.libill.demos.activity;
 import android.Manifest;
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.telephony.TelephonyManager;
 import android.text.method.ScrollingMovementMethod;
 import android.util.DisplayMetrics;

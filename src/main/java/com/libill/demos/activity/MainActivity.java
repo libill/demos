@@ -138,6 +138,5 @@ public class MainActivity extends ListActivity {
 		Intent intent = new Intent(MainActivity.this, aClass);
 		intent.putExtra("aTestContent","This is a test content.");
 		startActivity(intent);
-		startActivity(intent);
 	}
 }
