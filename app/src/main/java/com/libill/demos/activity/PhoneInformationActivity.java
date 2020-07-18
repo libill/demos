@@ -107,9 +107,9 @@ public class PhoneInformationActivity extends Activity {
         TelephonyManager tm = (TelephonyManager) this.getSystemService(TELEPHONY_SERVICE);
 
         phoneInfo += "屏幕分辨率:" + metrics.widthPixels + "*" + metrics.heightPixels
-                + "\nDeviceId，唯一的设备ID:" + tm.getDeviceId()
+//                + "\nDeviceId，唯一的设备ID:" + tm.getDeviceId()
                 + "\nthe phone number:" + tm.getLine1Number()
-                + "\nsoftware version:" + tm.getDeviceSoftwareVersion()
+//                + "\nsoftware version:" + tm.getDeviceSoftwareVersion()
                 + "\nService Provider Name (SPN):" + tm.getSimOperatorName()
                 + "\ndevice phone type:" + tm.getPhoneType()
                 + "\nNetworkType:" + tm.getNetworkType()

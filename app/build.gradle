@@ -5,52 +5,15 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
-dependencies {
-    implementation fileTree(dir: 'libs', include: '*.jar')
-
-    api "androidx.legacy:legacy-support-v4:${androidSupportVersion}"
-
-    api "org.permissionsdispatcher:permissionsdispatcher:4.3.0"
-    kapt "org.permissionsdispatcher:permissionsdispatcher-processor:4.3.0"
-
-    implementation "androidx.core:core-ktx:1.3.0"
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation "androidx.appcompat:appcompat:$appcompat_version"
-    implementation "com.google.android.material:material:$materialVersion"
-    implementation "androidx.fragment:fragment-ktx:$fragmentVersion"
-    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion"
-    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion"
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"
-    implementation "androidx.navigation:navigation-fragment-ktx:$navigationVersion"
-    implementation "androidx.navigation:navigation-ui-ktx:$navigationVersion"
-}
-
-// 设置编译android项目的参数，构建android项目的所有配置在这里完成
 android {
-    compileSdkVersion = 29
-    buildToolsVersion = "29.0.3"
-
+    compileSdkVersion build_versions.compile_sdk
     defaultConfig {
-        minSdkVersion 16
-        targetSdkVersion 29
-        resConfigs "zh"  //去除多国语言资源，只支持中文
+        minSdkVersion build_versions.min_sdk
+        targetSdkVersion build_versions.target_sdk
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
-
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_7
-        targetCompatibility JavaVersion.VERSION_1_7
-    }
-
-    sourceSets {
-        main {
-            aidl.srcDirs = ['src/main/java']
-        }
-    }
-
-    viewBinding {
-        enabled = true
-    }
-
     buildTypes {
         release {
             minifyEnabled true
@@ -62,6 +25,38 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    viewBinding {
+        enabled = true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: '*.jar')
+
+    api "androidx.legacy:legacy-support-v4:${androidSupportVersion}"
+
+    implementation deps.app_compat
+    implementation deps.material
+    implementation deps.core_ktx
+    implementation deps.constraint_layout
+    implementation deps.lifecycle.runtime
+    implementation deps.lifecycle.viewmodel_ktx
+    implementation deps.lifecycle.livedata_ktx
+    implementation deps.activity.activity_ktx
+
+    implementation deps.kotlin.stdlib
+
+
+    implementation deps.permissionsdispatcher.permissionsdispatcher
+    kapt deps.permissionsdispatcher.permissionsdispatcher_processor
+
+
+    testImplementation deps.junit
 }
 
 //// 自定义一个task
