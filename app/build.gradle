@@ -1,0 +1,145 @@
+//apply plugin: 'com.lv.weblogic'
+// 声明构建的项目类型
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: '*.jar')
+
+    api "androidx.legacy:legacy-support-v4:${androidSupportVersion}"
+
+    api "org.permissionsdispatcher:permissionsdispatcher:4.3.0"
+    kapt "org.permissionsdispatcher:permissionsdispatcher-processor:4.3.0"
+
+    implementation "androidx.core:core-ktx:1.3.0"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "androidx.appcompat:appcompat:$appcompat_version"
+    implementation "com.google.android.material:material:$materialVersion"
+    implementation "androidx.fragment:fragment-ktx:$fragmentVersion"
+    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"
+    implementation "androidx.navigation:navigation-fragment-ktx:$navigationVersion"
+    implementation "androidx.navigation:navigation-ui-ktx:$navigationVersion"
+}
+
+// 设置编译android项目的参数，构建android项目的所有配置在这里完成
+android {
+    compileSdkVersion = 29
+    buildToolsVersion = "29.0.3"
+
+    defaultConfig {
+        minSdkVersion 16
+        targetSdkVersion 29
+        resConfigs "zh"  //去除多国语言资源，只支持中文
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
+
+    sourceSets {
+        main {
+            aidl.srcDirs = ['src/main/java']
+        }
+    }
+
+    viewBinding {
+        enabled = true
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+//// 自定义一个task
+//task downloadPackageTask {
+//    print "compileSdkVersion is ${android.compileSdkVersion};  "
+//    println "buildToolsVersion is ${android.buildToolsVersion}  "
+//
+//    //当前日期时间
+//    String nowDate = new Date().format('yyyyMMddHHmmss')
+//    String fileName = "src/main/assets/package/README_${nowDate}"
+//
+//    String targetPath = getBuildDir().parent + "\\src\\main\\assets\\package\\"
+//
+//    //先删掉该文件夹的文件
+//    fileTree(targetPath).forEach({ file ->
+//        file.delete()
+//    })
+//
+//    //拷贝文件过来
+//    copy {
+//        from 'README'
+//        into targetPath
+//    }
+//
+//    //重命名文件
+//    File file = new File("src/main/assets/package/README")
+//    file.renameTo(fileName)
+////    String remoteFilePath = "http://files.cnblogs.com/liqw/"
+////    String zipName = "Bezier.zip"
+////    redirectFollowingDownload(remoteFilePath, zipName, path)
+//
+//    def remoteFilePathList = []
+//    def zipNameList = []
+//    String rootURL = "http://files.cnblogs.com/"
+//    remoteFilePathList.add(rootURL + "liqw/")
+//    zipNameList.add("Bezier.zip")
+//
+//    println "start download package file"
+//    for (int i = 0; i < remoteFilePathList.size(); i++) {
+//        redirectFollowingDownload(remoteFilePathList.get(i), zipNameList.get(i), targetPath)
+//    }
+//    println "download all package file success"
+//}
+//
+//def redirectFollowingDownload(String url, String filename, String targetPath) {
+//    String filePath = url + filename;
+//    while (url) {
+//        new URL(url).openConnection().with { conn ->
+//            conn.instanceFollowRedirects = false
+//            url = conn.getHeaderField("Location")
+//            if (!url) {
+//                new File(targetPath + filename).withOutputStream { out ->
+//                    conn.inputStream.with { inp ->
+//                        out << inp
+//                        inp.close()
+//                    }
+//                }
+//            }
+//        }
+//    }
+//    //拷贝文件到相应目录
+//    copy {
+//        from filename
+//        into targetPath
+//    }
+//    //删掉备份文件
+//    File tempfile = new File(filename)
+//    tempfile.delete()
+//    println "delete file " + filename
+//
+//    if(new File(targetPath + filename).exists()){
+//        println targetPath + filename + " exists"
+//    }
+//
+//    // 输出下载文件并拷贝到相应目录成功
+//    println "download file " + filePath + " success"
+//}
+
+// 再执行preBuild之前插入执行task, 处理或输出一些信息
+// @see: http://www.blogjava.net/wldandan/archive/2012/07/05/382246.html
+//preBuild.dependsOn downloadPackageTask
