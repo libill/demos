@@ -132,6 +132,9 @@ public class MainActivity extends ListActivity {
 		case 13:
 			startActivityNow(UDPServerActivity.class);
 			break;
+		case 14:
+			startActivityNow(SeekBarActivity.class);
+			break;
 
 		default:
 			break;
