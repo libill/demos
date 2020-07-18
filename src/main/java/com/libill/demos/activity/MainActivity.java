@@ -78,6 +78,10 @@ public class MainActivity extends ListActivity {
 		map = new HashMap<String, String>();
 		map.put("title", "UDPServerActivity");
 		list.add(map);
+
+		map = new HashMap<String, String>();
+		map.put("title", "SeekBarActivity");
+		list.add(map);
 		
 		MainBaseAdapter adapter = new MainBaseAdapter(this, list);
 		this.setListAdapter(adapter);

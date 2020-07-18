@@ -134,7 +134,7 @@ public class PhoneInformationActivity extends Activity {
          * GSM手机的 IMEI 和 CDMA手机的 MEID.
          * Return null if device ID is not available.
          */
-        tm.getDeviceId();//String     
+        tm.getDeviceId();//String
 
         /*
          * 设备的软件版本号：
@@ -155,7 +155,7 @@ public class PhoneInformationActivity extends Activity {
          * 类型：List<NeighboringCellInfo>
          * 需要权限：android.Manifest.permission#ACCESS_COARSE_UPDATES
          */
-        tm.getNeighboringCellInfo();//List<NeighboringCellInfo>     
+        //tm.getNeighboringCellInfo();//List<NeighboringCellInfo>
 
         /*
          * 获取ISO标准的国家码，即国际长途区号。

@@ -47,6 +47,7 @@
         <activity android:name=".activity.SharePreferencesActivity" />
         <activity android:name=".activity.UDPActivity" />
         <activity android:name=".activity.UDPServerActivity" />
+        <activity android:name=".activity.SeekBarActivity" />
 
 
         <service
