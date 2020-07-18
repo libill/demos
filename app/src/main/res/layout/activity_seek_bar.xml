@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <SeekBar
@@ -10,11 +11,12 @@
         android:layout_height="100dp" />
 
     <com.libill.demos.view.NumberSeekBar
-        style="@style/Widget.AppCompat.SeekBar"
+        style="@style/NumberSeekBarStyle"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:background="@android:color/holo_gray_light"
+        android:layout_height="50dp"
+        android:background="#ff5ccc33"
         android:max="100"
-        android:progress="10" />
+        android:progress="10"
+        app:progressTextSize="15sp"/>
 
 </LinearLayout>

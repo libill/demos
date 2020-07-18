@@ -10,6 +10,7 @@ import android.text.TextPaint
 import android.util.AttributeSet
 import androidx.annotation.RequiresApi
 import androidx.appcompat.widget.AppCompatSeekBar
+import com.libill.demos.R
 
 /**
  * @Description:
@@ -19,30 +20,50 @@ import androidx.appcompat.widget.AppCompatSeekBar
 
 @RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
 class NumberSeekBar : AppCompatSeekBar {
-    // 画笔
     private var mPaint: Paint? = null
+    private var textSize: Float = 15F
 
     // 进度文字位置信息
     private val mProgressTextRect: Rect = Rect()
 
-    constructor(context: Context) : super(context)
-    constructor(context: Context, attrs: AttributeSet?) : super(context, attrs)
+    constructor(context: Context) : this(context, null)
+    constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
     constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(
             context,
             attrs,
             defStyleAttr
-    )
+    ) {
+        initView(attrs)
+    }
 
-    init {
+    private fun initView(attrs: AttributeSet?) {
+        attrs ?: return
+
+        val attributeValues = context.obtainStyledAttributes(attrs, R.styleable.NumberSeekBarAttrs)
+        with(attributeValues) {
+            try {
+                textSize = getDimension(R.styleable.NumberSeekBarAttrs_progressTextSize, 20F)
+            } finally {
+                recycle()
+            }
+        }
+        initPaint()
+    }
+
+    private fun initPaint() {
         mPaint = TextPaint()
         mPaint!!.isAntiAlias = true
         mPaint!!.color = Color.parseColor("#00574B")
-        mPaint!!.textSize = this.thumb.intrinsicHeight.toFloat()
+        mPaint!!.textSize = textSize
     }
 
     @Synchronized
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
+        drawProgressText(canvas)
+    }
+
+    private fun drawProgressText(canvas: Canvas) {
         val progressText: String = progress.toString()
         mPaint!!.getTextBounds(progressText, 0, progressText.length, mProgressTextRect)
 
@@ -54,7 +75,7 @@ class NumberSeekBar : AppCompatSeekBar {
             thumbX += this.thumb.intrinsicWidth / 5.0f
         }
 
-        val thumbY: Float = height / 2f - mProgressTextRect.height()
+        val thumbY: Float = 0f + paddingTop
         canvas.drawText(progressText, thumbX, thumbY, mPaint!!)
     }
 }

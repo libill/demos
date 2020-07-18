@@ -21,6 +21,11 @@
         <item name="android:windowNoTitle">true</item>
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
+
+
+    <style name="NumberSeekBarStyle" parent="Widget.AppCompat.SeekBar">
+        <item name="android:paddingTop">20dp</item>
+    </style>
     
 
 </resources>
