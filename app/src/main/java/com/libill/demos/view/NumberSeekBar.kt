@@ -37,16 +37,17 @@ class NumberSeekBar : AppCompatSeekBar {
     }
 
     private fun initView(attrs: AttributeSet?) {
-        attrs ?: return
-
-        val attributeValues = context.obtainStyledAttributes(attrs, R.styleable.NumberSeekBarAttrs)
-        with(attributeValues) {
-            try {
-                textSize = getDimension(R.styleable.NumberSeekBarAttrs_progressTextSize, 20F)
-            } finally {
-                recycle()
+        attrs?.let {
+            val attributeValues = context.obtainStyledAttributes(it, R.styleable.NumberSeekBar)
+            with(attributeValues) {
+                try {
+                    textSize = getDimension(R.styleable.NumberSeekBar_progressTextSize, 20F)
+                } finally {
+                    recycle()
+                }
             }
         }
+
         initPaint()
     }
 
