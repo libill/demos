@@ -43,7 +43,6 @@ gradle
 .classpath
 *.classpath
 .settings/org.eclipse.core.resources.prefs
-cstudents.iml
 gradlew
 gradlew.bat
 local.properties
