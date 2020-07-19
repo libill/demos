@@ -3,6 +3,7 @@ package com.libill.demos.activity
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.libill.demos.databinding.ActivitySeekBarBinding
+import com.libill.demos.dialog.AddPhotoBottomDialogFragment
 
 /**
  * @Description:
@@ -17,5 +18,14 @@ class SeekBarActivity : AppCompatActivity() {
         binding = ActivitySeekBarBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+
+        binding.btnDialog.setOnClickListener {
+            showAddPhotoDialog()
+        }
+    }
+
+    private fun showAddPhotoDialog() {
+        var addPhotoDialog = AddPhotoBottomDialogFragment()
+        addPhotoDialog.show(supportFragmentManager, "add_photo_dialog_fragment")
     }
 }
