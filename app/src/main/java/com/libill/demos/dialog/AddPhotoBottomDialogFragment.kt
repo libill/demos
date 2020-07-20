@@ -65,20 +65,7 @@ class AddPhotoBottomDialogFragment : DialogFragment() {
         windowParams!!.dimAmount = 0.0f
         windowParams.width = WindowManager.LayoutParams.MATCH_PARENT
         windowParams.gravity = Gravity.BOTTOM
+        windowParams.windowAnimations = R.style.BottomDialogAnimation;
         window.attributes = windowParams
-
-//        dialog?.window?.run {
-//            // 全屏隐藏导航栏
-//            setFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE)
-//            fullScreenImmersive(decorView)
-//            clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE)
-//
-//            // 背景透明
-//            attributes.run {
-//                dimAmount = 0.0f
-//                width = WindowManager.LayoutParams.MATCH_PARENT
-//                gravity = Gravity.BOTTOM
-//            }
-//        }
     }
 }

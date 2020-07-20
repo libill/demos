@@ -33,4 +33,9 @@
         <item name="android:windowIsFloating">true</item>
         <item name="android:backgroundDimEnabled">false</item>
     </style>
+
+    <style name="BottomDialogAnimation">
+        <item name="android:windowEnterAnimation">@anim/dialog_bottom_up</item>
+        <item name="android:windowExitAnimation">@anim/dialog_bottom_down</item>
+    </style>
 </resources>
