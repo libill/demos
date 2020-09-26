@@ -82,6 +82,10 @@ public class MainActivity extends ListActivity {
 		map = new HashMap<String, String>();
 		map.put("title", "SeekBarActivity");
 		list.add(map);
+
+		map = new HashMap<String, String>();
+		map.put("title", "SideBarActivity");
+		list.add(map);
 		
 		MainBaseAdapter adapter = new MainBaseAdapter(this, list);
 		this.setListAdapter(adapter);
@@ -134,6 +138,9 @@ public class MainActivity extends ListActivity {
 			break;
 		case 14:
 			startActivityNow(SeekBarActivity.class);
+			break;
+		case 15:
+			startActivityNow(SideBarActivity.class);
 			break;
 
 		default:
