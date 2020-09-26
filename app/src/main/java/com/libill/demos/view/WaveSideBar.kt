@@ -15,7 +15,7 @@ import java.util.*
 
 
 /**
- * Created by gjz on 8/23/16.
+ * copy from https://github.com/gjiazhe/WaveSideBar
  */
 class WaveSideBar @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : View(context, attrs, defStyleAttr) {
     private var mIndexItems: Array<String>
@@ -122,7 +122,7 @@ class WaveSideBar @JvmOverloads constructor(context: Context, attrs: AttributeSe
         for (indexItem in mIndexItems) {
             mBarWidth = Math.max(mBarWidth, mPaint.measureText(indexItem))
         }
-        val areaLeft: Float = (if (mSideBarPosition == POSITION_LEFT) 0 else width - mBarWidth - paddingRight) as Float
+        val areaLeft: Float = (if (mSideBarPosition == POSITION_LEFT) 0 else width - paddingLeft - mBarWidth - paddingRight) as Float
         val areaRight = if (mSideBarPosition == POSITION_LEFT) paddingLeft + areaLeft + mBarWidth else width.toFloat()
         val areaTop = height / 2 - mBarHeight / 2
         val areaBottom = areaTop + mBarHeight
