@@ -32,7 +32,7 @@ class WaveSideBar @JvmOverloads constructor(context: Context, attrs: AttributeSe
      * it's reset to -1 when the finger up
      */
     private var mCurrentY = -1f
-    private var mPaint: Paint? = null
+    private lateinit var mPaint: Paint
     private var mTextColor: Int
     private var mTextSize: Float
 
@@ -97,15 +97,16 @@ class WaveSideBar @JvmOverloads constructor(context: Context, attrs: AttributeSe
      * for [.dp2px] and [.sp2px]
      */
     private val mDisplayMetrics: DisplayMetrics
+
     private fun initPaint() {
         mPaint = Paint()
-        mPaint!!.isAntiAlias = true
-        mPaint!!.color = mTextColor
-        mPaint!!.textSize = mTextSize
+        mPaint.isAntiAlias = true
+        mPaint.color = mTextColor
+        mPaint.textSize = mTextSize
         when (mTextAlignment) {
-            TEXT_ALIGN_CENTER -> mPaint!!.textAlign = Paint.Align.CENTER
-            TEXT_ALIGN_LEFT -> mPaint!!.textAlign = Paint.Align.LEFT
-            TEXT_ALIGN_RIGHT -> mPaint!!.textAlign = Paint.Align.RIGHT
+            TEXT_ALIGN_CENTER -> mPaint.textAlign = Paint.Align.CENTER
+            TEXT_ALIGN_LEFT -> mPaint.textAlign = Paint.Align.LEFT
+            TEXT_ALIGN_RIGHT -> mPaint.textAlign = Paint.Align.RIGHT
         }
     }
 
@@ -113,13 +114,13 @@ class WaveSideBar @JvmOverloads constructor(context: Context, attrs: AttributeSe
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
         val height = MeasureSpec.getSize(heightMeasureSpec)
         val width = MeasureSpec.getSize(widthMeasureSpec)
-        val fontMetrics = mPaint!!.fontMetrics
+        val fontMetrics = mPaint.fontMetrics
         mIndexItemHeight = fontMetrics.bottom - fontMetrics.top
         mBarHeight = mIndexItems.size * mIndexItemHeight
 
         // calculate the width of the longest text as the width of side bar
         for (indexItem in mIndexItems) {
-            mBarWidth = Math.max(mBarWidth, mPaint!!.measureText(indexItem))
+            mBarWidth = Math.max(mBarWidth, mPaint.measureText(indexItem))
         }
         val areaLeft: Float = (if (mSideBarPosition == POSITION_LEFT) 0 else width - mBarWidth - paddingRight) as Float
         val areaRight = if (mSideBarPosition == POSITION_LEFT) paddingLeft + areaLeft + mBarWidth else width.toFloat()
@@ -143,10 +144,13 @@ class WaveSideBar @JvmOverloads constructor(context: Context, attrs: AttributeSe
             val baseLineY = mFirstItemBaseLineY + mIndexItemHeight * i
 
             // calculate the scale factor of the item to draw
+            // val scale = 0
+            // val alphaScale = 255
+            // val textSize = mTextSize
             val scale = getItemScale(i)
             val alphaScale = if (i == mCurrentIndex) 255 else (255 * (1 - scale)).toInt()
-            mPaint!!.alpha = alphaScale
-            mPaint!!.textSize = mTextSize + mTextSize * scale
+            mPaint.alpha = alphaScale
+            mPaint.textSize = mTextSize + mTextSize * scale
             var baseLineX = 0f
             if (mSideBarPosition == POSITION_LEFT) {
                 when (mTextAlignment) {
@@ -167,13 +171,13 @@ class WaveSideBar @JvmOverloads constructor(context: Context, attrs: AttributeSe
                     mIndexItems[i],  //item text to draw
                     baseLineX,  //baseLine X
                     baseLineY,  // baseLine Y
-                    mPaint!!)
+                    mPaint)
             i++
         }
 
         // reset paint
-        mPaint!!.alpha = 255
-        mPaint!!.textSize = mTextSize
+        mPaint.alpha = 255
+        mPaint.textSize = mTextSize
     }
 
     /**
@@ -258,7 +262,7 @@ class WaveSideBar @JvmOverloads constructor(context: Context, attrs: AttributeSe
 
     fun setTextColor(color: Int) {
         mTextColor = color
-        mPaint!!.color = color
+        mPaint.color = color
         invalidate()
     }
 
@@ -282,9 +286,9 @@ class WaveSideBar @JvmOverloads constructor(context: Context, attrs: AttributeSe
             return
         }
         when (align) {
-            TEXT_ALIGN_CENTER -> mPaint!!.textAlign = Paint.Align.CENTER
-            TEXT_ALIGN_LEFT -> mPaint!!.textAlign = Paint.Align.LEFT
-            TEXT_ALIGN_RIGHT -> mPaint!!.textAlign = Paint.Align.RIGHT
+            TEXT_ALIGN_CENTER -> mPaint.textAlign = Paint.Align.CENTER
+            TEXT_ALIGN_LEFT -> mPaint.textAlign = Paint.Align.LEFT
+            TEXT_ALIGN_RIGHT -> mPaint.textAlign = Paint.Align.RIGHT
             else -> throw IllegalArgumentException(
                     "the alignment must be TEXT_ALIGN_CENTER, TEXT_ALIGN_LEFT or TEXT_ALIGN_RIGHT")
         }
@@ -297,7 +301,7 @@ class WaveSideBar @JvmOverloads constructor(context: Context, attrs: AttributeSe
             return
         }
         mTextSize = size
-        mPaint!!.textSize = size
+        mPaint.textSize = size
         invalidate()
     }
 
