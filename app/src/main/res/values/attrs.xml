@@ -3,4 +3,9 @@
     <declare-styleable name="NumberSeekBar">
         <attr name="progressTextSize" format="dimension" />
     </declare-styleable>
+    <declare-styleable name="HomepageEditTextLayout">
+        <attr name="homepageTextHint" format="string" />
+        <attr name="homepageText" format="string" />
+        <attr name="homepageInputType" format="string" />
+    </declare-styleable>
 </resources>

@@ -25,4 +25,23 @@
         android:layout_height="wrap_content"
         android:text="显示对话框"/>
 
+<!--    <com.libill.demos.view.HomepageEditTextLayout-->
+<!--        android:layout_width="200dp"-->
+<!--        android:layout_height="50dp"-->
+<!--        android:layout_marginTop="100dp"-->
+<!--        app:homepageTextHint="8888"-->
+<!--        app:homepageInputType="text"-->
+<!--        app:homepageText="999"-->
+<!--        />-->
+
+    <com.libill.demos.view.HomepageEditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@android:color/darker_gray"
+        android:drawableRight="@drawable/ic_launcher"
+        android:text="666"
+        android:hint="999"
+        android:drawableEnd="@drawable/ic_launcher"
+        />
+
 </LinearLayout>
