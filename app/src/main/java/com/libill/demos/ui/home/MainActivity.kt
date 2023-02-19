@@ -8,6 +8,7 @@ import android.widget.ListView
 import com.libill.demos.R
 import com.libill.demos.activity.*
 import com.libill.demos.adapter.MainBaseAdapter
+import com.libill.demos.ui.multi.MultiTypeActivity
 import com.libill.demos.ui.stickyheader.StickyHeaderActivity
 
 class MainActivity : ListActivity() {
@@ -35,6 +36,7 @@ class MainActivity : ListActivity() {
             add(SeekBarActivity::class.java)
             add(SideBarActivity::class.java)
             add(StickyHeaderActivity::class.java)
+            add(MultiTypeActivity::class.java)
         }
 
         val adapter = MainBaseAdapter(this, list)
