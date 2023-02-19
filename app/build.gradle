@@ -57,6 +57,11 @@ dependencies {
 
 
     testImplementation deps.junit
+
+
+    implementation deps.app_compat
+    implementation deps.constraint_layout
+    implementation deps.material
 }
 
 //// 自定义一个task

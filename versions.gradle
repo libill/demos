@@ -23,10 +23,10 @@ versions.permissionsdispatcher = "4.3.0"
 ext.versions = versions
 
 def build_versions = [:]
-build_versions.min_sdk = 14
-build_versions.compile_sdk = 32
-build_versions.target_sdk = 29
-build_versions.build_tools = "30.0.3"
+build_versions.min_sdk = 24
+build_versions.compile_sdk = 33
+build_versions.target_sdk = 33
+build_versions.build_tools = "33.0.0"
 ext.build_versions = build_versions
 
 def deps = [:]

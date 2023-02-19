@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.libill.demos">
+<manifest
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.libill.demos"
+    >
 
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <!-- Home监听需要的权限 -->
@@ -17,10 +19,12 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        >
         <activity
-            android:name="com.libill.demos.activity.MainActivity"
-            android:label="@string/app_name">
+            android:name="com.libill.demos.ui.home.MainActivity"
+            android:exported="true"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -29,7 +33,8 @@
         </activity>
         <activity
             android:name=".activity.ArrayAdapterListActivity"
-            android:launchMode="singleTask" />
+            android:launchMode="singleTask"
+            />
         <activity android:name=".activity.ArrayAdapterActivity" />
         <activity android:name=".activity.ArrayAdapterActivity2" />
         <activity android:name=".activity.SimpleAdapterActivity" />
@@ -41,26 +46,32 @@
         <activity android:name=".activity.PhoneInformationActivity" />
         <activity
             android:name=".activity.LifecycleActivity"
-            android:launchMode="singleTop" />
+            android:launchMode="singleTop"
+            />
         <activity android:name=".activity.SharePreferencesActivity" />
         <activity android:name=".activity.UDPActivity" />
         <activity android:name=".activity.UDPServerActivity" />
         <activity android:name=".activity.SeekBarActivity" />
         <activity android:name=".activity.SideBarActivity" />
+        <activity android:name=".ui.stickyheader.StickyHeaderActivity" />
 
 
         <service
             android:name=".service.HomeKeyWatchService"
             android:enabled="true"
-            android:exported="false"></service>
+            android:exported="false"
+            />
         <service
             android:name=".service.ScreenLockWatchService"
             android:enabled="true"
-            android:exported="false"></service>
-        <service android:name=".service.MyService"></service>
+            android:exported="false"
+            />
+        <service android:name=".service.MyService" />
         <service
             android:name=".service.RemoteService"
-            android:process=":remote">
+            android:exported="true"
+            android:process=":remote"
+            >
             <intent-filter>
                 <action android:name="com.libill.demos.service.RemoteAIDLService" />
             </intent-filter>
