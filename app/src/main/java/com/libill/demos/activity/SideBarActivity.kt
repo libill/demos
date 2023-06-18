@@ -1,13 +1,15 @@
 package com.libill.demos.activity
 
 import android.os.Bundle
-import android.os.PersistableBundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.libill.demos.R
+import com.libill.demos.ui.multi.IDecorationCallback
+import com.libill.demos.ui.multi.PinnedSectionDecoration
 import com.libill.demos.view.WaveSideBar
 import java.util.*
+import kotlin.collections.ArrayList
 
 
 class SideBarActivity : AppCompatActivity() {
@@ -37,6 +39,15 @@ class SideBarActivity : AppCompatActivity() {
                 }
             }
         })
+        rvContacts?.addItemDecoration(PinnedSectionDecoration(this@SideBarActivity, object : IDecorationCallback {
+            override fun getGroupId(position: Int): Long {
+                return contacts[position].index.toCharArray()[0].code.toLong()
+            }
+
+            override fun getGroupFirstLine(position: Int): String {
+               return  contacts[position].name.substring(0, 1).toUpperCase(Locale.ROOT)
+            }
+        }))
     }
 
     private fun initData() {

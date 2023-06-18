@@ -62,6 +62,7 @@ dependencies {
     implementation deps.app_compat
     implementation deps.constraint_layout
     implementation deps.material
+    implementation "androidx.recyclerview:recyclerview:1.2.1"
 }
 
 //// 自定义一个task

@@ -55,6 +55,7 @@
         <activity android:name=".activity.SideBarActivity" />
         <activity android:name=".ui.stickyheader.StickyHeaderActivity" />
         <activity android:name=".ui.multi.MultiTypeActivity" />
+        <activity android:name=".activity.RecycleViewActivity" />
 
 
         <service

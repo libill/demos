@@ -27,7 +27,7 @@ class MultiTypeActivity : BaseActivity() {
             }
 
             val list = mutableListOf<MultiTypeData>()
-            for (i in 0..300) {
+            for (i in 0..26) {
                 val multiType = when (i % 3) {
                     0 -> MultiType.One
                     1 -> MultiType.Two

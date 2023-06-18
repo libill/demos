@@ -53,10 +53,11 @@
 
         </com.google.android.material.appbar.AppBarLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
+        <com.libill.demos.view.NoEventRecycleView
             android:id="@+id/recycler_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/recycle_view_padding"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             />
 
