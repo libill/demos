@@ -39,7 +39,6 @@ nosetests.xml
 .idea
 .classpath
 *.iml
-gradle
 .classpath
 *.classpath
 .settings/org.eclipse.core.resources.prefs
