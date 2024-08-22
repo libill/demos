@@ -8,16 +8,14 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.util.Log;
-import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.Button;
 
 import com.libill.demos.R;
-import com.libill.demos.service.RemoteAIDLService;
 import com.libill.demos.service.MyService;
+import com.libill.demos.service.RemoteAIDLService;
 import com.libill.demos.service.RemoteService;
 
-public class ServiceActivity extends Activity implements OnClickListener {
+public class ServiceActivity extends Activity {
 
 	private Button startService;
 
@@ -80,62 +78,45 @@ public class ServiceActivity extends Activity implements OnClickListener {
         stopService = (Button) findViewById(R.id.stop_service);  
         bindService = (Button) findViewById(R.id.bind_service);  
         unbindService = (Button) findViewById(R.id.unbind_service);  
-        startService.setOnClickListener(this);  
-        stopService.setOnClickListener(this);  
-        bindService.setOnClickListener(this);  
-        unbindService.setOnClickListener(this);  
+        startService.setOnClickListener(view -> {
+            Intent startIntent = new Intent(this, MyService.class);
+            startService(startIntent);
+        });
+        stopService.setOnClickListener(view -> {
+            Log.d("MyService", "click Stop Service button");
+            Intent stopIntent = new Intent(this, MyService.class);
+            stopService(stopIntent);
+        });
+        bindService.setOnClickListener(view -> {
+            Intent bindIntent = new Intent(this, MyService.class);
+            bindService(bindIntent, connection, BIND_AUTO_CREATE);
+        });
+        unbindService.setOnClickListener(view -> {
+            Log.d("MyService", "click Unbind Service button");
+            unbindService(connection);
+        });
         
         startRemoteService = (Button) findViewById(R.id.start_remote_service);  
         stopRemoteService = (Button) findViewById(R.id.stop_remote_service);  
         bindRemoteService = (Button) findViewById(R.id.bind_remote_service);  
         unbindRemoteService = (Button) findViewById(R.id.unbind_remote_service);  
-        startRemoteService.setOnClickListener(this);  
-        stopRemoteService.setOnClickListener(this);  
-        bindRemoteService.setOnClickListener(this);  
-        unbindRemoteService.setOnClickListener(this); 
-    }  
-  
-    public void onClick(View v) {  
-        switch (v.getId()) {  
-        case R.id.start_service:  
-            Intent startIntent = new Intent(this, MyService.class);  
-            startService(startIntent);  
-            break;  
-        case R.id.stop_service:  
-            Log.d("MyService", "click Stop Service button");  
-            Intent stopIntent = new Intent(this, MyService.class);  
-            stopService(stopIntent);  
-            break;  
-        case R.id.bind_service:  
-            Intent bindIntent = new Intent(this, MyService.class);  
-            bindService(bindIntent, connection, BIND_AUTO_CREATE);  
-            break;  
-        case R.id.unbind_service:  
-            Log.d("MyService", "click Unbind Service button");  
-            unbindService(connection);  
-            break;  
-            
-            
-        case R.id.start_remote_service:  
-            Intent startRIntent = new Intent(this, RemoteService.class);  
-            startService(startRIntent);  
-            break;  
-        case R.id.stop_remote_service:  
-            Log.d("RemoteService", "click Stop Service button");  
-            Intent stopRIntent = new Intent(this, RemoteService.class);  
-            stopService(stopRIntent);  
-            break;  
-        case R.id.bind_remote_service:  
+        startRemoteService.setOnClickListener(view -> {
+            Intent startRIntent = new Intent(this, RemoteService.class);
+            startService(startRIntent);
+        });
+        stopRemoteService.setOnClickListener(view -> {
+            Log.d("RemoteService", "click Stop Service button");
+            Intent stopRIntent = new Intent(this, RemoteService.class);
+            stopService(stopRIntent);
+        });
+        bindRemoteService.setOnClickListener(view -> {
             Intent bindRIntent = new Intent("com.libill.demos.service.RemoteAIDLService");
-            bindService(bindRIntent, remoteConnection, BIND_AUTO_CREATE);  
-            break;  
-        case R.id.unbind_remote_service:  
+            bindService(bindRIntent, remoteConnection, BIND_AUTO_CREATE);
+        });
+        unbindRemoteService.setOnClickListener(view -> {
             Log.d("RemoteService", "click Unbind Service button");
             unbindService(remoteConnection);
-            break;  
-        default:  
-            break;  
-        }  
-    }   
+        });
+    }
   
 }  

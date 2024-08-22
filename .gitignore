@@ -43,6 +43,7 @@ gradle
 .classpath
 *.classpath
 .settings/org.eclipse.core.resources.prefs
+.DS_Store
 gradlew
 gradlew.bat
 local.properties

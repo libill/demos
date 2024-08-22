@@ -1,4 +1,4 @@
-package com.libill.demos.ui.multi
+package com.libill.demos.util
 
 import android.content.Context
 import android.content.res.Resources
@@ -29,7 +29,7 @@ class PinnedSectionDecoration(
         val res: Resources = context.resources
         callback = decorationCallback
         paint = Paint()
-        paint.color = res.getColor(R.color.design_default_color_error, null)
+        paint.color = res.getColor(com.google.android.material.R.color.design_default_color_error, null)
         textPaint = TextPaint()
         textPaint.typeface = Typeface.DEFAULT_BOLD
         textPaint.isAntiAlias = true

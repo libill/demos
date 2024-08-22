@@ -5,8 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.libill.demos.R
-import com.libill.demos.ui.multi.IDecorationCallback
-import com.libill.demos.ui.multi.PinnedSectionDecoration
+import com.libill.demos.util.IDecorationCallback
+import com.libill.demos.util.PinnedSectionDecoration
 import com.libill.demos.view.WaveSideBar
 import java.util.*
 import kotlin.collections.ArrayList

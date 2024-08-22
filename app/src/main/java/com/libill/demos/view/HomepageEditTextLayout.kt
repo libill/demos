@@ -6,10 +6,10 @@ import android.text.InputType
 import android.text.TextWatcher
 import android.util.AttributeSet
 import android.view.LayoutInflater
-import android.view.View
 import android.widget.LinearLayout
+import androidx.core.view.isVisible
 import com.libill.demos.R
-import kotlinx.android.synthetic.main.homepage_edit_text_layout.view.*
+import com.libill.demos.databinding.HomepageEditTextLayoutBinding
 
 /**
  * Author: liqiongwei
@@ -32,18 +32,22 @@ class HomepageEditTextLayout : LinearLayout {
         initView(attrs)
     }
 
-    init {
-        LayoutInflater.from(context).inflate(R.layout.homepage_edit_text_layout, this, true)
+    private val binding by lazy {
+        HomepageEditTextLayoutBinding.inflate(LayoutInflater.from(context), this, true)
     }
 
     private fun initView(attrs: AttributeSet?) {
         attrs?.let {
-            val attributeValues = context.obtainStyledAttributes(it, R.styleable.HomepageEditTextLayout)
+            val attributeValues =
+                context.obtainStyledAttributes(it, R.styleable.HomepageEditTextLayout)
             with(attributeValues) {
                 try {
                     mText = this.getString(R.styleable.HomepageEditTextLayout_homepageText) ?: ""
-                    mTextHint = this.getString(R.styleable.HomepageEditTextLayout_homepageTextHint) ?: ""
-                    mInputType = this.getString(R.styleable.HomepageEditTextLayout_homepageInputType) ?: "text"
+                    mTextHint =
+                        this.getString(R.styleable.HomepageEditTextLayout_homepageTextHint) ?: ""
+                    mInputType =
+                        this.getString(R.styleable.HomepageEditTextLayout_homepageInputType)
+                            ?: "text"
                 } finally {
                     recycle()
                 }
@@ -54,21 +58,23 @@ class HomepageEditTextLayout : LinearLayout {
             "text" -> {
                 type = InputType.TYPE_CLASS_TEXT
             }
+
             "phone" -> {
                 type = InputType.TYPE_CLASS_PHONE
             }
+
             "password" -> {
                 type = InputType.TYPE_TEXT_VARIATION_PASSWORD
             }
         }
-        et_input.inputType = type
-        et_input.setText(mText)
+        binding.etInput.inputType = type
+        binding.etInput.setText(mText)
 
-        iv_clear_text.setOnClickListener {
-            et_input.setText("")
+        binding.ivClearText.setOnClickListener {
+            binding.etInput.setText("")
         }
 
-        et_input.addTextChangedListener(object : TextWatcher {
+        binding.etInput.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
             }
 
@@ -76,20 +82,16 @@ class HomepageEditTextLayout : LinearLayout {
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                if (s != null && s.isNotEmpty()) {
-                    iv_clear_text.visibility = View.VISIBLE
-                } else {
-                    iv_clear_text.visibility = View.GONE
-                }
+                binding.ivClearText.isVisible = !s.isNullOrEmpty()
             }
         })
     }
 
     fun setText(text: String) {
-        et_input.setText(text)
+        binding.etInput.setText(text)
     }
 
     fun getText(): String {
-        return et_input.text.toString()
+        return binding.etInput.text.toString()
     }
 }
