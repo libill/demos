@@ -11,6 +11,10 @@ constraintlayout = "2.1.4"
 navigationFragmentKtx = "2.6.0"
 navigationUiKtx = "2.6.0"
 permissionsDispatcher = "4.8.0"
+okhttp3Version = "4.12.0"
+glideVersion = "4.16.0"
+arouterVersion = "1.5.2"
+dokitxVersion = "3.7.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -24,8 +28,18 @@ androidx-navigation-fragment-ktx = { group = "androidx.navigation", name = "navi
 androidx-navigation-ui-ktx = { group = "androidx.navigation", name = "navigation-ui-ktx", version.ref = "navigationUiKtx" }
 permissions-dispatcher = { group = "com.github.permissions-dispatcher", name = "permissionsdispatcher", version.ref = "permissionsDispatcher" }
 permissions-dispatcher-processor = { group = "com.github.permissions-dispatcher", name = "permissionsdispatcher-processor", version.ref = "permissionsDispatcher" }
+okhttp3-bom = { group = "com.squareup.okhttp3", name = "okhttp-bom", version.ref = "okhttp3Version"}
+okhttp3-logging-interceptor = { group = "com.squareup.okhttp3", name = "okhttp"}
+okhttp3 = { group = "com.squareup.okhttp3", name = "logging-interceptor"}
+glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glideVersion"}
+arouter = { group = "com.alibaba", name = "arouter-api", version.ref = "arouterVersion"}
+arouterCompiler = { group = "com.alibaba", name = "arouter-compiler", version.ref = "arouterVersion"}
+
+dokitx = { group = "io.github.didi.dokit", name = "dokitx", version.ref = "dokitxVersion"}
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
+android-library = { id = "com.android.library", version.ref = "agp" }
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+dokit = { id = "com.didi.dokit", version.ref = "dokitxVersion" }
 

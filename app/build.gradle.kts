@@ -2,20 +2,27 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
     id("kotlin-kapt")
+    //id("com.didi.dokit")
 }
 
 android {
     namespace = "com.libill.demos"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.libill.demos"
         minSdk = 24
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        kapt {
+            arguments {
+                arg("AROUTER_MODULE_NAME", project.name)
+            }
+        }
     }
 
     buildTypes {
@@ -39,24 +46,37 @@ android {
         viewBinding = true
     }
 
-    sourceSets.getByName("main") {
-        aidl.srcDirs("src/main/aidl")
-    }
 }
 
 dependencies {
-
+    implementation(fileTree("libs"))
+    //implementation(project(":base"))
+    implementation(project(":testJ"))
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
-    implementation(libs.permissions.dispatcher)
 
+    implementation(libs.permissions.dispatcher)
+    implementation(files("src/main/libs/test.jar"))
+    implementation(files("src/main/libs/testJ.jar"))
     kapt(libs.permissions.dispatcher.processor)
+
+    implementation(platform(libs.okhttp3.bom))
+    implementation(libs.okhttp3)
+    implementation(libs.okhttp3.logging.interceptor)
+
+    implementation(libs.glide)
+
+    implementation(libs.arouter)
+    kapt(libs.arouterCompiler)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    debugImplementation(libs.dokitx)
+    debugImplementation("com.android.volley:volley:1.2.0")
 }

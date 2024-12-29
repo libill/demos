@@ -1,10 +1,13 @@
 package com.libill.demos.activity;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -12,15 +15,26 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.libill.base.TestCode;
+
+import aa.ThreadTestTTTT;
+
 public class ArrayAdapterActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
+		List<Integer> intergerList = new ArrayList<>();
+		Set<Integer> a = new HashSet<Integer>();
+		// registerActivityLifecycleCallbacks();
+		// getFragmentManager().registerFragmentLifecycleCallbacks();
+		TestCode t = new TestCode();
+		new ThreadTestTTTT();
 		//界面中的ListView是View，这里通过硬编码的方式直接Java代码生成
 		ListView listView = new ListView(this);
-		
+
 		// 控制数据怎样在ListView中显示是Controller
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1, getData());
 		
@@ -37,6 +51,7 @@ public class ArrayAdapterActivity extends Activity {
 				Toast.makeText(ArrayAdapterActivity.this, getData().get(position), Toast.LENGTH_SHORT).show();
 			}
 		});
+		printClassLoader();
 	}
 
 	// 要显示的数据Model，通过硬编码的方式直接Java代码生成
@@ -47,5 +62,16 @@ public class ArrayAdapterActivity extends Activity {
 		data.add("c");
 		data.add("d");
 		return data;
+	}
+
+	private void printClassLoader() {
+		ClassLoader classLoader = getClassLoader();
+		while (classLoader != null) {
+			Log.i("ClassLoaderTag", "ClassLoader:"+classLoader);
+			classLoader = classLoader.getParent();
+		}
+
+		Log.i("ClassLoaderTag", "Activity ClassLoader:"+Activity.class.getClassLoader());
+		Log.i("ClassLoaderTag", "AppCompatActivity ClassLoader:"+ AppCompatActivity.class.getClassLoader());
 	}
 }

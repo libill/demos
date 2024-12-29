@@ -61,3 +61,5 @@ class AA {
     public static final double a = 3 + 1; //不加载类
     public static double b = 3 + 1; // 加载类
 }
+
+
