@@ -38,3 +38,4 @@ rootProject.name = "demos"
 include(":app")
 include(":base")
 include(":testJ")
+include(":testcode")

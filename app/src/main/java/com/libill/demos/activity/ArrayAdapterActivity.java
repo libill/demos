@@ -1,12 +1,17 @@
 package com.libill.demos.activity;
 
+import static android.content.res.Configuration.ORIENTATION_PORTRAIT;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.res.Configuration;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -22,6 +27,16 @@ import com.libill.base.TestCode;
 import aa.ThreadTestTTTT;
 
 public class ArrayAdapterActivity extends Activity {
+
+	@Override
+	protected void attachBaseContext(Context newBase) {
+		super.attachBaseContext(newBase);
+		// test
+		DisplayMetrics displayMetrics = newBase.getApplicationContext().getResources().getDisplayMetrics();
+		Configuration configuration = newBase.getApplicationContext().getResources().getConfiguration();
+		configuration.orientation = ORIENTATION_PORTRAIT;
+		newBase.getApplicationContext().getResources().updateConfiguration(configuration, displayMetrics);
+	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

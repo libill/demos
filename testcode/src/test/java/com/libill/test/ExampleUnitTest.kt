@@ -1,4 +1,4 @@
-package com.libill.base
+package com.libill.test
 
 import org.junit.Test
 

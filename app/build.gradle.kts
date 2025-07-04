@@ -52,6 +52,7 @@ dependencies {
     implementation(fileTree("libs"))
     //implementation(project(":base"))
     implementation(project(":testJ"))
+    implementation(project(":testcode"))
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
@@ -69,6 +70,7 @@ dependencies {
     implementation(libs.okhttp3.logging.interceptor)
 
     implementation(libs.glide)
+    implementation(libs.lifecycleProcess)
 
     implementation(libs.arouter)
     kapt(libs.arouterCompiler)

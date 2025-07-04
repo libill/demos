@@ -45,7 +45,7 @@ class SideBarActivity : AppCompatActivity() {
             }
 
             override fun getGroupFirstLine(position: Int): String {
-               return  contacts[position].name.substring(0, 1).toUpperCase(Locale.ROOT)
+               return contacts[position].name.substring(0, 1).uppercase(Locale.ROOT)
             }
         }))
     }
