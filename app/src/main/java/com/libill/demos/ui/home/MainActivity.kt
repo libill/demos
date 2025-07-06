@@ -23,8 +23,9 @@ class MainActivity : BaseActivity() {
         }
     }
 
-    public override fun onCreate(icicle: Bundle?) {
-        super.onCreate(icicle)
+    public override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
         ActivityMainBinding.inflate(layoutInflater).apply {
             setContentView(this.root)
             recyclerView.apply {

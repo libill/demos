@@ -37,7 +37,7 @@
             android:name=".activity.ArrayAdapterListActivity"
             android:launchMode="singleTask"
             />
-        <activity android:name=".activity.ArrayAdapterActivity" />
+        <activity android:name=".activity.array.ArrayAdapterActivity" />
         <activity android:name=".activity.ArrayAdapterActivity2" />
         <activity android:name=".activity.SimpleAdapterActivity" />
         <activity android:name=".activity.SimpleAdapterListActivity" />

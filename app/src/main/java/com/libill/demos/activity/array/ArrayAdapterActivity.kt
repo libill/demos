@@ -1,92 +1,82 @@
-package com.libill.demos.activity;
+package com.libill.demos.activity.array
 
-import static android.content.res.Configuration.ORIENTATION_PORTRAIT;
+import aa.ThreadTestTTTT
+import android.app.Activity
+import android.content.Context
+import android.content.res.Configuration
+import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.libill.base.TestCode
+import com.libill.demos.base.BaseActivity
+import com.libill.demos.databinding.ActivityArrayListBinding
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+class ArrayAdapterActivity : BaseActivity() {
 
-import android.app.Activity;
-import android.content.Context;
-import android.content.res.Configuration;
-import android.os.Bundle;
-import android.util.DisplayMetrics;
-import android.util.Log;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.Toast;
+    private val dataList = getData()
 
-import androidx.appcompat.app.AppCompatActivity;
+    override fun attachBaseContext(newBase: Context) {
+        super.attachBaseContext(newBase)
+        // test
+        val displayMetrics = newBase.applicationContext.resources.displayMetrics
+        val configuration = newBase.applicationContext.resources.configuration
+        configuration.orientation = Configuration.ORIENTATION_PORTRAIT
+        newBase.applicationContext.resources.updateConfiguration(configuration, displayMetrics)
+    }
 
-import com.libill.base.TestCode;
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val intergerList: List<Int> = ArrayList()
+        val a: Set<Int> = HashSet()
+        // registerActivityLifecycleCallbacks();
+        // getFragmentManager().registerFragmentLifecycleCallbacks();
+        val t = TestCode()
+        ThreadTestTTTT()
+        //界面中的ListView是View，这里通过硬编码的方式直接Java代码生成
 
-import aa.ThreadTestTTTT;
+        // 控制数据怎样在ListView中显示是Controller
+        val mAdapter = ArrayAdapterAdapter() { position ->
+            Toast.makeText(baseContext, dataList[position], Toast.LENGTH_SHORT).show()
+        }
 
-public class ArrayAdapterActivity extends Activity {
 
-	@Override
-	protected void attachBaseContext(Context newBase) {
-		super.attachBaseContext(newBase);
-		// test
-		DisplayMetrics displayMetrics = newBase.getApplicationContext().getResources().getDisplayMetrics();
-		Configuration configuration = newBase.getApplicationContext().getResources().getConfiguration();
-		configuration.orientation = ORIENTATION_PORTRAIT;
-		newBase.getApplicationContext().getResources().updateConfiguration(configuration, displayMetrics);
-	}
+        ActivityArrayListBinding.inflate(layoutInflater).apply {
+            setContentView(this.root)
+            recyclerView.apply {
+                layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+                adapter = mAdapter
+            }
+            mAdapter.setData(dataList)
+        }
+        printClassLoader()
+    }
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		List<Integer> intergerList = new ArrayList<>();
-		Set<Integer> a = new HashSet<Integer>();
-		// registerActivityLifecycleCallbacks();
-		// getFragmentManager().registerFragmentLifecycleCallbacks();
-		TestCode t = new TestCode();
-		new ThreadTestTTTT();
-		//界面中的ListView是View，这里通过硬编码的方式直接Java代码生成
-		ListView listView = new ListView(this);
+    /**
+     * 要显示的数据Model，通过硬编码的方式直接Java代码生成
+     */
+    private fun getData(): List<String> {
+        val data = mutableListOf<String>()
+        data.add("a")
+        data.add("b")
+        data.add("c")
+        data.add("d")
+        return data
+    }
 
-		// 控制数据怎样在ListView中显示是Controller
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1, getData());
-		
-		//View和Model是通过桥梁Adapter来连接起来。
-		listView.setAdapter(adapter);
-		setContentView(listView);
+    private fun printClassLoader() {
+        var classLoader = classLoader
+        while (classLoader != null) {
+            Log.i("ClassLoaderTag", "ClassLoader:$classLoader")
+            classLoader = classLoader.parent
+        }
 
-		// 点击事件，Controller负责
-		listView.setOnItemClickListener(new OnItemClickListener() {
-
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				// position是从0开始的,获取点击item的内容
-				Toast.makeText(ArrayAdapterActivity.this, getData().get(position), Toast.LENGTH_SHORT).show();
-			}
-		});
-		printClassLoader();
-	}
-
-	// 要显示的数据Model，通过硬编码的方式直接Java代码生成
-	private List<String> getData() {
-		List<String> data = new ArrayList<String>();
-		data.add("a");
-		data.add("b");
-		data.add("c");
-		data.add("d");
-		return data;
-	}
-
-	private void printClassLoader() {
-		ClassLoader classLoader = getClassLoader();
-		while (classLoader != null) {
-			Log.i("ClassLoaderTag", "ClassLoader:"+classLoader);
-			classLoader = classLoader.getParent();
-		}
-
-		Log.i("ClassLoaderTag", "Activity ClassLoader:"+Activity.class.getClassLoader());
-		Log.i("ClassLoaderTag", "AppCompatActivity ClassLoader:"+ AppCompatActivity.class.getClassLoader());
-	}
+        Log.i("ClassLoaderTag", "Activity ClassLoader:" + Activity::class.java.classLoader)
+        Log.i(
+            "ClassLoaderTag",
+            "AppCompatActivity ClassLoader:" + AppCompatActivity::class.java.classLoader
+        )
+    }
 }

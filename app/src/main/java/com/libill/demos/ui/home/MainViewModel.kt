@@ -1,7 +1,7 @@
 package com.libill.demos.ui.home
 
 import androidx.lifecycle.ViewModel
-import com.libill.demos.activity.ArrayAdapterActivity
+import com.libill.demos.activity.array.ArrayAdapterActivity
 import com.libill.demos.activity.ArrayAdapterActivity2
 import com.libill.demos.activity.ArrayAdapterListActivity
 import com.libill.demos.activity.BaseAdapterActivity
