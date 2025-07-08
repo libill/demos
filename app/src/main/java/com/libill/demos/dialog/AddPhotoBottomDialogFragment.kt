@@ -3,11 +3,12 @@ package com.libill.demos.dialog
 import android.app.Dialog
 import android.os.Build
 import android.os.Bundle
-import android.view.WindowManager
-import android.view.View
-import android.view.LayoutInflater
-import android.view.ViewGroup
 import android.view.Gravity
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.view.WindowManager
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.DialogFragment
 import com.libill.demos.R
 import com.libill.demos.databinding.LayoutPhotoBottomSheetBinding
@@ -23,7 +24,7 @@ class AddPhotoBottomDialogFragment : DialogFragment() {
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val dialog = Dialog(activity!!, R.style.BottomDialog)
+        val dialog = Dialog(requireActivity(), R.style.BottomDialog)
         dialog.setCanceledOnTouchOutside(true);
         return dialog
     }
@@ -68,4 +69,10 @@ class AddPhotoBottomDialogFragment : DialogFragment() {
         windowParams.windowAnimations = R.style.BottomDialogAnimation;
         window.attributes = windowParams
     }
+}
+
+fun AppCompatActivity.showAddPhotoDialog(): AddPhotoBottomDialogFragment {
+    var addPhotoDialog = AddPhotoBottomDialogFragment()
+    addPhotoDialog.show(supportFragmentManager, "add_photo_dialog_fragment")
+    return addPhotoDialog
 }

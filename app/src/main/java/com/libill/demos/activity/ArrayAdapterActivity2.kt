@@ -1,39 +1,36 @@
 package com.libill.demos.activity
 
 import android.os.Bundle
-import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.ListView
 import android.widget.Toast
 import com.libill.demos.R
 import com.libill.demos.base.BaseActivity
+import com.libill.demos.databinding.ActivityArrayadapterBinding
 
 class ArrayAdapterActivity2 : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_arrayadapter)
-        //界面中的ListView是View，View在layout目录下通过xml文件格式生成，用getViewById()获取
-        val listView = findViewById<View>(R.id.listview) as ListView
+        ActivityArrayadapterBinding.inflate(layoutInflater).apply {
+            setContentView(this.root)
+            // 控制数据怎样在ListView中显示是Controller
+            val adapter = ArrayAdapter(
+                this@ArrayAdapterActivity2, android.R.layout.simple_expandable_list_item_1,
+                data
+            )
 
-        // 控制数据怎样在ListView中显示是Controller
-        val adapter = ArrayAdapter(
-            this, android.R.layout.simple_expandable_list_item_1,
-            data
-        )
+            //View和Model是通过桥梁Adapter来连接起来。
+            listView.adapter = adapter
 
-
-        //View和Model是通过桥梁Adapter来连接起来。
-        listView.adapter = adapter
-
-        // 点击事件，Controller负责
-        listView.onItemClickListener = AdapterView.OnItemClickListener { parent, view, position, id ->
-            // position是从0开始的,获取点击item的内容
-            Toast.makeText(
-                this@ArrayAdapterActivity2,
-                data[position],
-                Toast.LENGTH_SHORT
-            ).show()
+            // 点击事件，Controller负责
+            listView.onItemClickListener = AdapterView.OnItemClickListener { parent, view, position, id ->
+                // position是从0开始的,获取点击item的内容
+                Toast.makeText(
+                    this@ArrayAdapterActivity2,
+                    data[position],
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
         }
     }
 

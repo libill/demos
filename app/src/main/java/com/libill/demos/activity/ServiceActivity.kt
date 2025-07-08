@@ -1,122 +1,103 @@
-package com.libill.demos.activity;
+package com.libill.demos.activity
 
-import android.app.Activity;
-import android.content.ComponentName;
-import android.content.Intent;
-import android.content.ServiceConnection;
-import android.os.Bundle;
-import android.os.IBinder;
-import android.os.RemoteException;
-import android.util.Log;
-import android.widget.Button;
+import android.content.ComponentName
+import android.content.Intent
+import android.content.ServiceConnection
+import android.os.Bundle
+import android.os.IBinder
+import android.os.RemoteException
+import android.util.Log
+import android.view.View
+import com.libill.demos.base.BaseActivity
+import com.libill.demos.databinding.ActivityServiceBinding
+import com.libill.demos.service.MyService
+import com.libill.demos.service.MyService.MyBinder
+import com.libill.demos.service.RemoteAIDLService
+import com.libill.demos.service.RemoteService
 
-import com.libill.demos.R;
-import com.libill.demos.service.MyService;
-import com.libill.demos.service.RemoteAIDLService;
-import com.libill.demos.service.RemoteService;
+class ServiceActivity : BaseActivity() {
+    private var myBinder: MyBinder? = null
 
-public class ServiceActivity extends Activity {
+    private var remoteAIDLService: RemoteAIDLService? = null
 
-	private Button startService;
+    private val connection: ServiceConnection = object : ServiceConnection {
+        override fun onServiceDisconnected(name: ComponentName) {
+        }
 
-	private Button stopService;
-
-	private Button bindService;
-
-	private Button unbindService;
-	
-	private Button startRemoteService;  
-	  
-    private Button stopRemoteService;  
-  
-    private Button bindRemoteService;  
-  
-    private Button unbindRemoteService;  
-  
-    private MyService.MyBinder myBinder;  
-    
-    private RemoteAIDLService remoteAIDLService;
-  
-    private ServiceConnection connection = new ServiceConnection() {  
-  
-        @Override  
-        public void onServiceDisconnected(ComponentName name) {  
-        }  
-  
-        @Override  
-        public void onServiceConnected(ComponentName name, IBinder service) {  
-            myBinder = (MyService.MyBinder) service;  
-            myBinder.startDownload();  
-        }  
-    };  
-    
-    private ServiceConnection remoteConnection = new ServiceConnection() {  
-    	  
-        @Override  
-        public void onServiceDisconnected(ComponentName name) {  
-        }  
-  
-        @Override  
-        public void onServiceConnected(ComponentName name, IBinder service) {  
-            remoteAIDLService = RemoteAIDLService.Stub.asInterface(service);  
-            try {  
-                int result = remoteAIDLService.plus(50, 50);  
-                String upperStr = remoteAIDLService.toUpperCase("comes from ClientTest");  
-                Log.d("TAG", "result is " + result);  
-                Log.d("TAG", "upperStr is " + upperStr);  
-            } catch (RemoteException e) {  
-                e.printStackTrace();  
-            }  
-        }  
-    }; 
-  
-    @Override  
-    protected void onCreate(Bundle savedInstanceState) {  
-        super.onCreate(savedInstanceState);  
-        setContentView(R.layout.activity_service);  
-        startService = (Button) findViewById(R.id.start_service);  
-        stopService = (Button) findViewById(R.id.stop_service);  
-        bindService = (Button) findViewById(R.id.bind_service);  
-        unbindService = (Button) findViewById(R.id.unbind_service);  
-        startService.setOnClickListener(view -> {
-            Intent startIntent = new Intent(this, MyService.class);
-            startService(startIntent);
-        });
-        stopService.setOnClickListener(view -> {
-            Log.d("MyService", "click Stop Service button");
-            Intent stopIntent = new Intent(this, MyService.class);
-            stopService(stopIntent);
-        });
-        bindService.setOnClickListener(view -> {
-            Intent bindIntent = new Intent(this, MyService.class);
-            bindService(bindIntent, connection, BIND_AUTO_CREATE);
-        });
-        unbindService.setOnClickListener(view -> {
-            Log.d("MyService", "click Unbind Service button");
-            unbindService(connection);
-        });
-        
-        startRemoteService = (Button) findViewById(R.id.start_remote_service);  
-        stopRemoteService = (Button) findViewById(R.id.stop_remote_service);  
-        bindRemoteService = (Button) findViewById(R.id.bind_remote_service);  
-        unbindRemoteService = (Button) findViewById(R.id.unbind_remote_service);  
-        startRemoteService.setOnClickListener(view -> {
-            Intent startRIntent = new Intent(this, RemoteService.class);
-            startService(startRIntent);
-        });
-        stopRemoteService.setOnClickListener(view -> {
-            Log.d("RemoteService", "click Stop Service button");
-            Intent stopRIntent = new Intent(this, RemoteService.class);
-            stopService(stopRIntent);
-        });
-        bindRemoteService.setOnClickListener(view -> {
-            Intent bindRIntent = new Intent("com.libill.demos.service.RemoteAIDLService");
-            bindService(bindRIntent, remoteConnection, BIND_AUTO_CREATE);
-        });
-        unbindRemoteService.setOnClickListener(view -> {
-            Log.d("RemoteService", "click Unbind Service button");
-            unbindService(remoteConnection);
-        });
+        override fun onServiceConnected(name: ComponentName, service: IBinder) {
+            myBinder = service as MyBinder
+            myBinder!!.startDownload()
+        }
     }
-  
-}  
+
+    private val remoteConnection: ServiceConnection = object : ServiceConnection {
+        override fun onServiceDisconnected(name: ComponentName) {
+        }
+
+        override fun onServiceConnected(name: ComponentName, service: IBinder) {
+            remoteAIDLService = RemoteAIDLService.Stub.asInterface(service)
+            try {
+                val result = remoteAIDLService?.plus(50, 50)
+                val upperStr = remoteAIDLService?.toUpperCase("comes from ClientTest")
+                Log.d("TAG", "result is $result")
+                Log.d("TAG", "upperStr is $upperStr")
+            } catch (e: RemoteException) {
+                e.printStackTrace()
+            }
+        }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        ActivityServiceBinding.inflate(layoutInflater).apply {
+            setContentView(this.root)
+            startService.setOnClickListener { view: View? ->
+                val startIntent = Intent(
+                    this@ServiceActivity,
+                    MyService::class.java
+                )
+                startService(startIntent)
+            }
+            stopService.setOnClickListener { view: View? ->
+                Log.d("MyService", "click Stop Service button")
+                val stopIntent = Intent(this@ServiceActivity, MyService::class.java)
+                stopService(stopIntent)
+            }
+            bindService.setOnClickListener { view: View? ->
+                val bindIntent = Intent(
+                    this@ServiceActivity,
+                    MyService::class.java
+                )
+                bindService(bindIntent, connection, BIND_AUTO_CREATE)
+            }
+            unbindService.setOnClickListener { view: View? ->
+                Log.d("MyService", "click Unbind Service button")
+                unbindService(connection)
+            }
+
+            startRemoteService.setOnClickListener { view: View? ->
+                val startRIntent = Intent(
+                    this@ServiceActivity,
+                    RemoteService::class.java
+                )
+                startService(startRIntent)
+            }
+            stopRemoteService.setOnClickListener { view: View? ->
+                Log.d("RemoteService", "click Stop Service button")
+                val stopRIntent =
+                    Intent(this@ServiceActivity, RemoteService::class.java)
+                stopService(stopRIntent)
+            }
+            bindRemoteService.setOnClickListener { view: View? ->
+                val bindRIntent =
+                    Intent("com.libill.demos.service.RemoteAIDLService")
+                bindService(bindRIntent, remoteConnection, BIND_AUTO_CREATE)
+            }
+            unbindRemoteService.setOnClickListener { view: View? ->
+                Log.d("RemoteService", "click Unbind Service button")
+                unbindService(remoteConnection)
+            }
+        }
+
+    }
+}
