@@ -4,30 +4,31 @@
     <string name="app_name">demos</string>
     <string name="action_settings">Settings</string>
     <!-- Android 在资源文件（res/strings.xml）定义一维数组，二维数组，多维数组 -->
-    
+
     <!-- 字符串 -->
     <string name="hello_world">Hello world!</string>
-    
+
     <!-- 一维数组 -->
     <string-array name="good">
-        　		<item>a</item>
-　　        	<item>b</item>
-　　        	<item>c</item>
-　　        	<item>d</item>
+        <item>a</item>
+        <item>b</item>
+        <item>c</item>
+        <item>d</item>
     </string-array>
-    
+
     <!-- 二维数组 -->
- 	<array name="two">
+    <array name="two">
         <item>a，b，c，d，e，f，g</item>
         <item>h，i，g，k，l，m，n</item>
     </array>
-    
- 	<!-- 二维数组 -->
- 	<array name="three">
+
+    <!-- 二维数组 -->
+    <array name="three">
         <item>a，b，c，d，e，f，g</item>
         <item>h，i，g，k，l，m，n</item>
         <item>o，p，q，r，s，t，u</item>
     </array>
-    
- 	
+
+    <string name="permission_request_tip">开启权限.</string>
+
 </resources>

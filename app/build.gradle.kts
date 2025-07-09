@@ -60,10 +60,8 @@ dependencies {
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
 
-    implementation(libs.permissions.dispatcher)
     implementation(files("src/main/libs/test.jar"))
     implementation(files("src/main/libs/testJ.jar"))
-    kapt(libs.permissions.dispatcher.processor)
 
     implementation(platform(libs.okhttp3.bom))
     implementation(libs.okhttp3)
@@ -71,6 +69,7 @@ dependencies {
 
     implementation(libs.glide)
     implementation(libs.lifecycleProcess)
+    implementation(libs.kpermissions)
 
     implementation(libs.arouter)
     kapt(libs.arouterCompiler)

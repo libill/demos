@@ -19,3 +19,16 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.android) apply false
 //    alias(libs.plugins.dokit) apply false
 }
+
+allprojects {
+    configurations.all {
+        resolutionStrategy {
+            cacheDynamicVersionsFor(0, "seconds")
+            cacheChangingModulesFor(0, "seconds")
+        }
+    }
+}
+
+task("clean", Delete::class) {
+    delete(rootProject.buildDir)
+}
