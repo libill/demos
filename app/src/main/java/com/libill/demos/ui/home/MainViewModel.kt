@@ -1,6 +1,7 @@
 package com.libill.demos.ui.home
 
 import androidx.lifecycle.ViewModel
+import com.github.libill.compose.WeComposeActivity
 import com.libill.demos.activity.array.ArrayAdapterActivity
 import com.libill.demos.activity.ArrayAdapterActivity2
 import com.libill.demos.activity.ArrayAdapterListActivity
@@ -33,6 +34,7 @@ class MainViewModel : ViewModel() {
     private fun updateClassList() {
         val list = mutableListOf<Class<*>>()
         list.run {
+            add(WeComposeActivity::class.java)
             add(ArrayAdapterListActivity::class.java)
             add(ArrayAdapterActivity::class.java)
             add(SimpleAdapterActivity::class.java)

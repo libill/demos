@@ -46,3 +46,4 @@ nosetests.xml
 gradlew
 gradlew.bat
 local.properties
+.kotlin

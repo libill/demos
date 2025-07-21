@@ -38,7 +38,7 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: '*.jar')
 
-    api "androidx.legacy:legacy-support-v4:${androidSupportVersion}"
+//    api "androidx.legacy:legacy-support-v4:${androidSupportVersion}"
 
     implementation deps.app_compat
     implementation deps.material
