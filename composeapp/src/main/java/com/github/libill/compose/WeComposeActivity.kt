@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import com.github.libill.compose.ui.theme.WeComposeTheme
 import com.github.libill.compose.ui.view.WeNavigationBar
+import androidx.lifecycle.viewmodel.compose.viewModel
 
 class WeComposeActivity : ComponentActivity() {
 
