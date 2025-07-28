@@ -81,7 +81,7 @@ fun TabItem(@DrawableRes iconId: Int, title: String, tint: Color, modifier: Modi
         modifier.padding(top = 10.dp, bottom = 6.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Icon(painterResource(iconId), title, Modifier.size(24.dp), tint = tint)
+        Icon(painterResource(iconId), title, Modifier.size(24.dp).unread(true, MaterialTheme.colorScheme.primary), tint = tint)
         Text(text = title, fontSize = 11.sp, color = tint)
     }
 }
