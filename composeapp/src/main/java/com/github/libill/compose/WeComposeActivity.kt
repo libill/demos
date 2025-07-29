@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.Box
+import androidx.activity.viewModels
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.statusBarsPadding
@@ -14,19 +14,17 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import com.github.libill.compose.ui.theme.WeComposeTheme
-import com.github.libill.compose.ui.view.WeNavigationBar
-import androidx.lifecycle.viewmodel.compose.viewModel
-import com.github.libill.compose.data.getChatList
 import com.github.libill.compose.ui.view.ChatList
+import com.github.libill.compose.ui.view.WeNavigationBar
 import kotlinx.coroutines.launch
 
 class WeComposeActivity : ComponentActivity() {
+    private val viewModel: WeComposeViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            val viewModel: WeComposeViewModel = viewModel()
             WeComposeTheme {
                 Column(Modifier.statusBarsPadding()) {
                     val pageState = rememberPagerState { 4 }
