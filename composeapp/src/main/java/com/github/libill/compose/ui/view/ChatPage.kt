@@ -29,7 +29,7 @@ import com.github.libill.compose.data.Chat
 import com.github.libill.compose.data.getChatList
 
 @Composable
-fun ChatList(chats: List<Chat>) {
+fun ChatPage(chats: List<Chat>) {
     Box(
         Modifier
             .background(MaterialTheme.colorScheme.background)
@@ -93,5 +93,5 @@ fun Modifier.unread(show: Boolean, color: Color): Modifier = drawWithContent {
 @Composable
 fun ChatListPreview() {
     val list = getChatList()
-    ChatList(list)
+    ChatPage(list)
 }
