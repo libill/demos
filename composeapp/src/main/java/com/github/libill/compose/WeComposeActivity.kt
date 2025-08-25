@@ -11,6 +11,7 @@ import androidx.navigation.compose.rememberNavController
 import com.github.libill.compose.ui.theme.WeComposeTheme
 import com.github.libill.compose.ui.view.CalendarPage
 import com.github.libill.compose.ui.view.MainScreen
+import com.github.libill.compose.ui.view.NestedSlidingListSample
 
 class WeComposeActivity : ComponentActivity() {
     private val viewModel: WeComposeViewModel by viewModels()
@@ -38,6 +39,9 @@ class WeComposeActivity : ComponentActivity() {
                                 navController.popBackStack()
                             }
                         )
+                    }
+                    composable("NestedSlidingListSample") {
+                        NestedSlidingListSample()
                     }
                 }
             }

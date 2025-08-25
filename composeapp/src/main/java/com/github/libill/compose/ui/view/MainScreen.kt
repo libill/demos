@@ -9,6 +9,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import com.github.libill.compose.WeComposeViewModel
+import com.github.libill.compose.ui.collapsable.TestCollapsable
 import kotlinx.coroutines.launch
 
 
@@ -23,7 +24,8 @@ fun MainScreen(
             when (page) {
                 0 -> ChatPage(viewModel.chats)
                 1 -> ContactsPage()
-                2 -> DiscoverPage()
+//                2 -> DiscoverPage()
+                2 -> TestCollapsable()
                 3 -> MePage(
                     onNavigateToCalendar = {
                         navController.navigate("calendar")
