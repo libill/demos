@@ -103,25 +103,6 @@ fun WeekView(
     }
     
     Column {
-        // Week days header
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 16.dp, vertical = 8.dp),
-            horizontalArrangement = Arrangement.SpaceEvenly
-        ) {
-            val weekDays = listOf("日", "一", "二", "三", "四", "五", "六")
-            weekDays.forEach { day ->
-                Text(
-                    text = day,
-                    fontSize = 12.sp,
-                    color = Color.Gray,
-                    modifier = Modifier.weight(1f),
-                    textAlign = TextAlign.Center
-                )
-            }
-        }
-        
         // Week view with horizontal scrolling and sensitive gesture detection
         LazyRow(
             state = listState,

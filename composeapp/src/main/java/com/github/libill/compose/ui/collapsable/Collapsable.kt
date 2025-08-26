@@ -39,6 +39,9 @@ class CollapsableLayoutState(
     //默认 EXPANDED 状态 ，progress 默认为 1
     private val expendProgressState = mutableStateOf(1f)
 
+    val offset
+        get() = offsetState.value
+
     val currentTopState
         get() = topState.value
 

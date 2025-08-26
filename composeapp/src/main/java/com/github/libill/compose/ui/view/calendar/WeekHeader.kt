@@ -1,5 +1,6 @@
 package com.github.libill.compose.ui.view.calendar
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -19,6 +20,7 @@ fun WeekHeader() {
     Row(
         modifier = Modifier
             .fillMaxWidth()
+            .background(Color.White)
             .padding(horizontal = 16.dp, vertical = 8.dp),
         horizontalArrangement = Arrangement.SpaceEvenly
     ) {

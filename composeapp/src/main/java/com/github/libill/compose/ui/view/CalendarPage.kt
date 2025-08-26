@@ -125,6 +125,8 @@ fun CalendarPage(onBackPressed: () -> Unit = {}) {
             )
         }
 
+        WeekHeader()
+
         // Calendar content with smooth transition
         Box(
             modifier = Modifier
